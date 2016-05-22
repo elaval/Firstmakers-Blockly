@@ -1,0 +1,48 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Angula D3 Template</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="main.css">
+  <!-- endbuild -->
+
+ 
+</head>
+<body ng-app="tideApp" ng-controller="AppController as controller">
+
+
+  <script>
+    var Board = require("firmata");
+    var board;
+    
+    var fmtest = function() {
+
+      board = new Board("dev/cu.usbmodem1411");
+      
+      board.on("ready", function() {
+        console.log("OK");
+        
+        // Arduino is ready to communicate 
+      });  
+      
+      
+    }
+
+  </script>
+
+
+</body>
+</html>
+
