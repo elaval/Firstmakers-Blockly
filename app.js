@@ -6,7 +6,5 @@
 */
 angular
   .module('tideApp', [
-    'tide-angular',
-    'underscore',
-    'd3service',
+    'external_module_wrapper'
   ]);

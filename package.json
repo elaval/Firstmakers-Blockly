@@ -1,11 +1,11 @@
 {
   "main": "index.html",
-  "name": "Firstmakers",
-  "description": "demo app of node-webkit",
+  "name": "firstmakers",
+  "description": "Firstmakers (blockly version)",
   "version": "0.1.0",
   "keywords": [
-    "demo",
-    "node-webkit"
+    "firstmakers",
+    "blockly"
   ],
   "window": {
     "title": "Firstmakers Blockly",
@@ -17,15 +17,20 @@
     "position": "mouse",
     "min_width": 400,
     "min_height": 200,
-    "resizable" : true
+    "resizable": true
   },
   "webkit": {
     "plugin": true
   },
   "dependencies": {
-    "ble-serial": "^0.4.1",
+    "angular": "^1.5.5",
+    "angular-bootstrap": "^0.12.2",
+    "bootstrap": "^3.3.6",
+    "browser-serialport": "^2.0.3",
+    "d3": "^3.5.17",
     "firmata": "^0.12.0",
     "johnny-five": "^0.9.49",
-    "serialport": "^3.1.1"
+    "jquery": "^2.2.4",
+    "underscore": "^1.8.3"
   }
 }
