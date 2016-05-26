@@ -53,6 +53,7 @@ angular.module('tideApp')
     // Controler's 'constructor'
     function activate() {
         FirstmakersService.init();
+        scanPorts();
     }
  
     // Implementation of public methods
