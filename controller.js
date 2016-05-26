@@ -26,31 +26,78 @@
  *
  */
 angular.module('tideApp')
-.controller('AppController', ['$scope','$http','$timeout','$interval','_','d3', 'DataService', 'FirstmakersService', 'BoardService',function ($scope,$http,$timeout,$interval,_,d3, dataService, FirstmakersService, BoardService) {
+.controller('AppController', ['$scope','$http','$timeout','$interval','$uibModal','_','d3', 'DataService', 'FirstmakersService', 'BoardService','SerialService',function ($scope,$http,$timeout,$interval,$uibModal,_,d3, dataService, FirstmakersService, BoardService,SerialService) {
 	var myself = this;
-    this.loading = false;
-    this.data = [];
-    this.categories = [];
-    this.statusMessageText;
-    this.state = {whiteLight: false}
-   
-    myself.runCode = FirstmakersService.runCode;
-    myself.arduino = BoardService.getBoardState();
-    myself.connect = BoardService.connect;
-    myself.disconnect = function() {
-        BoardService.disconnect(true);
-    };
-    myself.softReset = softReset;
     
-    BoardService.detectPort();
-    FirstmakersService.init();
+    // Public functions (accesible from the view)
+    myself.runCode = runCode
+    myself.disconnectBoard = disconnectBoard
+    myself.scanPorts = scanPorts;
+    myself.softReset = softReset;
+
+    // Public properties (accesible from the view)
+    this.statusMessageText; // Message to be displyes to the user
+    this.state = {whiteLight: false} // state of virtual board
+    this.boardState = {
+        connected: false,
+        connecting: false
+    }
+    this.state = {whiteLight: false}
+    
+    // Local variables/properties
+    var physicalBoard = undefined;
+   
+    // Init controller
+    activate()
+    
+    // Controler's 'constructor'
+    function activate() {
+        FirstmakersService.init();
+    }
+ 
+    // Implementation of public methods
+    // ==================================
+    
+    /**
+     * Runs the Blockly code
+     */
+    function runCode() {
+        FirstmakersService.runCode();
+    }
+    
+    /**
+     * Disconnects a physicla board
+     */
+    function disconnectBoard() {
+        BoardService.disconnect(true);
+    }
+    
+    /**
+     * Resets the program 
+     */
+    function softReset() {
+        window.location.reload();
+    }
+    
+    /**
+     * Scans for available ports and if found, attempts to open a new board
+     */
+    function scanPorts() {
+        SerialService.Serial.detect(function(ports) {
+            connectBoard(ports);
+        });
+    }
+
+
+    // Implementation of private methods
+    // ==================================
 
     function statusMessage() {
         var msg = "";
         
-        if (myself.arduino.connected) {
+        if (myself.boardState.connected) {
             msg = "Tarjeta conectada";
-        } else if (!myself.arduino.connected && myself.arduino.connecting) {
+        } else if (!myself.boardState.connected && myself.boardState.connecting) {
             msg = "Conectando tarjeta";
         } else {
             msg = "Tarjeta no conectada";
@@ -59,9 +106,48 @@ angular.module('tideApp')
         return msg;
     }
     
-    function softReset() {
-        window.location.reload();
+    
+    /**
+     * Attempts to connect available ports
+     */
+    function connectBoard(ports) {
+        var firstPort = ports[0];
+        myself.boardState.connecting = true;
+        
+        BoardService.connect(firstPort)
+        .then(function(board) {
+            physicalBoard = board;
+            myself.boardState.connecting = false;
+            myself.boardState.connected = true;
+            console.log(board);
+        })
+        .catch(function(err) {
+            myself.boardState.connecting = false;
+            myself.boardState.connected = false;
+            
+            // TODO: Check if error seems to correspond to a non-firmata valid board or a "hanged" port and send a message
+            SerialService.Serial.lock(firstPort);
+            if (ports.length > 1) {  
+                ports = _.rest(ports);
+                connectBoard(ports);
+            } else {
+                scanPorts();
+            }
+            console.log(err);
+        });
     }
+    
+
+    /**
+     * Handles board.closed event 
+     * Triggered when board is disconnected (cable pulled)
+     * or when the board is automatically closed (for example due to an errror)
+     */
+    $scope.$on("board.closed", function(e,a) {
+        myself.boardState.connected = false;
+        scanPorts();
+        console.log(a);
+    })
     
 
     $scope.$on("virtualFirstmakersChange", function(e,pins){
@@ -69,12 +155,57 @@ angular.module('tideApp')
         
     });
     
+    /**
+     * Modal window (for future use)
+     */
+    var open = function (size, ports) {
+
+        var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/modal.html',
+        controller: 'ModalInstanceCtrl',
+        size: size ? size : 'sm',
+        resolve: {
+            items: function () {
+                return ports;
+            }
+        }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+    
+    
     $scope.$watch(statusMessage,
         function handleStatusChange( newValue, oldValue ) {
             myself.statusMessageText = newValue;
             console.log( "statusMessage", newValue );
         }
     );
+    
+    
+    
                 
                 
 }]);
+
+angular.module('tideApp')
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});

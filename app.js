@@ -6,5 +6,6 @@
 */
 angular
   .module('tideApp', [
+    'ui.bootstrap',
     'external_module_wrapper'
   ]);

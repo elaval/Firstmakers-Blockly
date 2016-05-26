@@ -77,10 +77,9 @@
         <p class="text-muted small">Pero la experienca es mejor con una tarjeta real.</p>
         <p><span class="label label-primary">{{controller.statusMessageText}}</span></p>
         <p><span calss="text-muted small" ng-show="!controller.arduino.connected && !controller.arduino.connecting">Conecta tu tarjeta Firstmakers</span></p>
-        <button ng-click="controller.connect()" type="button" class="btn btn-default btn-small" ng-show="!controller.arduino.connected && !controller.arduino.connecting">Connectar</button>
-        <button ng-click="controller.disconnect()" type="button" class="btn btn-default"  ng-show="controller.arduino.connected && !controller.arduino.connecting">Desconectar</button>
+        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting">Connectar</button>
+        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting">Desconectar</button>
       </div>
- 
     </div>
     
 
@@ -106,7 +105,7 @@
     <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="./node_modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
     <script src="./node_modules/d3/d3.js"></script>
     <script src="./node_modules/underscore/underscore.js"></script>
     <script src="./blockly/blockly_compressed.js"></script>
