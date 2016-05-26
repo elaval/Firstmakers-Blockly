@@ -40,7 +40,8 @@ angular.module('tideApp')
     this.state = {whiteLight: false} // state of virtual board
     this.boardState = {
         connected: false,
-        connecting: false
+        connecting: false,
+        port:null,
     }
     this.state = {whiteLight: false}
     
@@ -114,6 +115,7 @@ angular.module('tideApp')
     function connectBoard(ports) {
         var firstPort = ports[0];
         myself.boardState.connecting = true;
+        myself.boardState.port = firstPort;
         
         BoardService.connect(firstPort)
         .then(function(board) {

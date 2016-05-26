@@ -76,9 +76,10 @@
         <div virtual-firstmakers state="controller.state"></div>
         <p class="text-muted small">Pero la experienca es mejor con una tarjeta real.</p>
         <p><span class="label label-primary">{{controller.statusMessageText}}</span></p>
-        <p><span calss="text-muted small" ng-show="!controller.arduino.connected && !controller.arduino.connecting">Conecta tu tarjeta Firstmakers</span></p>
-        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting">Connectar</button>
-        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting">Desconectar</button>
+        <p><span class="label label-default" ng-show="controller.boardState.connecting" >{{controller.boardState.port}}</span></p>
+        <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting">Conecta tu tarjeta Firstmakers</span></p>
+        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false">Connectar</button>
+        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && false">Desconectar</button>
       </div>
     </div>
     
