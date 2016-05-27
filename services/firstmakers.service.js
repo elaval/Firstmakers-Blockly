@@ -20,7 +20,8 @@ angular.module('tideApp')
  
   myself.setWorkSpace = setWorkSpace;
   myself.getOptions = getOptions;
-  myself.runCode = runCode;  
+  myself.runCode = runCode; 
+  myself.runCode2 = runCode2;  
   myself.showCode = showCode;
   myself.init = init;
   
@@ -177,6 +178,50 @@ angular.module('tideApp')
     var code = 'test();\n';
     return code;
   };
+  
+  
+
+  function runCode2(_workspace) {
+    workspace = _workspace;
+    
+    // Configutarion of block higlighting functionality
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    
+    // Generate JavaScript code and run it.
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    myInterpreter = new Interpreter(code, initApi);
+    
+    highlightPause = false;
+    workspace.traceOn(true);
+    workspace.highlightBlock(null);
+    
+    
+    function stepCode() {
+      try {
+        var ok = myInterpreter.step();
+      } finally {
+        if (!ok) {
+          // Program complete, no more code to execute.
+          //document.getElementById('stepButton').disabled = 'disabled';
+          workspace.highlightBlock(null);
+          return;
+        }
+      }
+      
+      $timeout(0).then(stepCode);
+
+    }
+
+    stepCode();
+
+  }
+  
 
   function runCode() {
     // Configutarion of block higlighting functionality

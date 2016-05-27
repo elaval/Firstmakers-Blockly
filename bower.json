@@ -1,12 +1,27 @@
 {
-  "name": "tideApp",
+  "name": "firstmakers-blockly",
   "version": "0.0.1",
   "dependencies": {
-    "angular-bootstrap": "latest",
-    "tide-angular": "latest",
-    "modernizr": "latest",
-    "d3-tip": "latest",
-    "angularitics": "latest",
-    "bootstrap": "latest"
-  }
+    "angular": "^1.5.5",
+    "jquery": "^2.2.4",
+    "bootstrap": "^3.3.6",
+    "angular-bootstrap": "^1.3.3",
+    "d3": "^3.5.17",
+    "underscore": "^1.8.3",
+    "google-blockly": "*"
+  },
+  "homepage": "https://github.com/elaval/Firstmakers-Blockly",
+  "authors": [
+    "Ernesto Laval"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

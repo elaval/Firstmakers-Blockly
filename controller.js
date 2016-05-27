@@ -36,14 +36,16 @@ angular.module('tideApp')
     myself.softReset = softReset;
 
     // Public properties (accesible from the view)
-    this.statusMessageText; // Message to be displyes to the user
-    this.state = {whiteLight: false} // state of virtual board
-    this.boardState = {
+    myself.statusMessageText; // Message to be displyes to the user
+    myself.state = {whiteLight: false} // state of virtual board
+    myself.boardState = {
         connected: false,
         connecting: false,
         port:null,
     }
-    this.state = {whiteLight: false}
+    myself.state = {whiteLight: false}
+    myself.blocklyOptions = null;
+    myself.workspace = null;
     
     // Local variables/properties
     var physicalBoard = undefined;
@@ -60,11 +62,18 @@ angular.module('tideApp')
     // Implementation of public methods
     // ==================================
     
+    
+    FirstmakersService.getOptions(".blocks.xml")
+    .then(function(options){
+        myself.blocklyOptions = options;
+        console.log(myself.blocklyOptions);
+    })
+    
     /**
      * Runs the Blockly code
      */
     function runCode() {
-        FirstmakersService.runCode();
+        FirstmakersService.runCode2(myself.workspace);
     }
     
     /**

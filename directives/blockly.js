@@ -17,17 +17,18 @@ angular.module("tideApp")
   restrict: "E",
       template: '<div style="height:80vh"; width: 100%; resize:both; class="ng-blockly"></div>',
       scope: {
+        options:"=options",    // Blockly options definition (input)
+        workspace:"=workspace" // Blockly workspace (output)
       },
       link: function (scope, element, attrs) {
         var verticalMargin = 200;
         
-        FirstmakersService.getOptions()
-        .then(function(options) {
-          var workspace = Blockly.inject(element.children()[0], options);
-          FirstmakersService.setWorkSpace(workspace); 
-        })
-        
-        
+        function render(options) {
+          if (options) {
+            scope.workspace = Blockly.inject(element.children()[0], options);
+          }
+        }
+ 
         var onresize = function(e) {
           // Compute the absolute coordinates and dimensions of blocklyArea.
           var myelement = element.children()[0];
@@ -37,6 +38,9 @@ angular.module("tideApp")
         window.addEventListener('resize', onresize, false);
         onresize();
         
+        scope.$watch('options', function(o,n) {
+          render(scope.options);
+        })
         
       }
 
