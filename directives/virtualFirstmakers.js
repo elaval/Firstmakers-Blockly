@@ -14,7 +14,7 @@ angular.module("tideApp")
  return {
   restrict: "A",
       scope: {
-        state: "=state"
+        board: "=board"
       },
       
       link: function (scope, element, attrs) {
@@ -49,22 +49,23 @@ angular.module("tideApp")
           .attr("stroke", "black")
           .attr("stroke-width",1)
           
-        render(scope.state);
+        render(scope.board);
 
         /*
         * render
         */
-        function render(state) {
+        function render(board) {
           
           whiteLight
-          .attr("fill", state && state.whiteLight ? "yellow" : "grey");
+          .attr("fill", board && board.pins[13].value ? "yellow" : "grey");
 
         }
 
+        
         // Check for changes in data and re-render
-        scope.$watch("state", function () {
-          render(scope.state);
-        }, true);      
+        scope.$watch("board", function () {
+          render(scope.board);
+        }, true);     
   
       }
       

@@ -24,12 +24,13 @@ angular.module('tideApp')
   myself.runCode2 = runCode2;  
   myself.showCode = showCode;
   myself.init = init;
-  
 
-  
   var workspace;
   var myInterpreter;
   var highlightPause = false;
+  var physicalDevice = null;
+  var virtualDevice = null;
+  
 
   function setWorkSpace(_workspace) {
     workspace = _workspace;
@@ -181,8 +182,10 @@ angular.module('tideApp')
   
   
 
-  function runCode2(_workspace) {
+  function runCode2(_workspace, _virtualDevice, _physicalDevice) {
     workspace = _workspace;
+    virtualDevice = _virtualDevice;
+    physicalDevice = _physicalDevice;
     
     // Configutarion of block higlighting functionality
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -371,11 +374,22 @@ angular.module('tideApp')
   };
         
   var light = function(state) {
+    
+    if (virtualDevice) {
+      virtualDevice.light(state);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.light(state);
+    }
+    
+    /*
     if (BoardService.isBoardReady()) {
       BoardService.light(state);
     }
     
     VirtualBoardService.digitalWrite(13,state);
+    */
     
   }
 

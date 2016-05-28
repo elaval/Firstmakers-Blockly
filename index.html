@@ -74,7 +74,7 @@
       <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
         <h3 class="text-muted small">Tarjeta virtual</h3>
         <p class="text-muted small">Tu programa funcionará con la siguiente tarjeta virtual para hacer pruebas limitadas</p>
-        <div virtual-firstmakers state="controller.state"></div>
+        <div virtual-firstmakers state="controller.state" board="controller.virtualBoard"></div>
         <p class="text-muted small">Pero la experienca es mejor con una tarjeta real.</p>
         <p><span class="label label-primary">{{controller.statusMessageText}}</span></p>
         <p><span class="label label-default" ng-show="controller.boardState.connecting" >{{controller.boardState.port}}</span></p>
@@ -124,10 +124,10 @@
     <script src="services/firstmakers.service.js"></script>    
     <script src="services/board.service.js"></script>
     <script src="services/virtualBoard.service.js"></script>    
+    <script src="services/device.service.js"></script>    
     <script src="services/serial.service.js"></script>
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>
-
     <!-- endbuild -->
     
 

@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "firstmakers",
   "description": "Firstmakers (blockly version)",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "keywords": [
     "firstmakers",
     "blockly"
@@ -14,7 +14,7 @@
     "frame": true,
     "width": 1024,
     "height": 768,
-    "position": "mouse",
+    "position": "center",
     "min_width": 400,
     "min_height": 200,
     "resizable": true
