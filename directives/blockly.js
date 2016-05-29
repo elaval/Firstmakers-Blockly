@@ -12,7 +12,7 @@
  *
  */
 angular.module("tideApp")
-.directive("blockly",["$compile","_", "d3", "FirstmakersService", function ($compile,_, d3, FirstmakersService) {
+.directive("blockly",["$compile", function ($compile) {
  return {
   restrict: "E",
       template: '<div style="height:80vh"; width: 100%; resize:both; class="ng-blockly"></div>',
@@ -25,6 +25,10 @@ angular.module("tideApp")
         
         function render(options) {
           if (options) {
+            // Remove exiting blockly elements
+            element.children().children().remove();
+            
+            // Inject new blockly ui
             scope.workspace = Blockly.inject(element.children()[0], options);
           }
         }

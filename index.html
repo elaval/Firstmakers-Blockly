@@ -45,7 +45,7 @@
     </div>
     <div id="navbar1" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="#">(Version Blockly)</a></li>
+          <li><a href="#" translate>BLOCKLY_VERSION</a></li>
         </ul>
     </div>
  
@@ -72,15 +72,15 @@
           <blockly3></blockly2>
       </div>
       <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <h3 class="text-muted small">Tarjeta virtual</h3>
-        <p class="text-muted small">Tu programa funcionará con la siguiente tarjeta virtual para hacer pruebas limitadas</p>
+        <h3 class="text-muted small" translate>VIRTUAL_BOARD</h3>
+        <p class="text-muted small" translate>VIRTUAL_BOARD_MSG</p>
         <div virtual-firstmakers state="controller.state" board="controller.virtualBoard"></div>
-        <p class="text-muted small">Pero la experienca es mejor con una tarjeta real.</p>
-        <p><span class="label label-primary">{{controller.statusMessageText}}</span></p>
+        <p class="text-muted small" translate>VIRTUAL_BOARD_MSG_2</p>
+        <p><span class="label label-primary" translate>{{controller.statusMessageText}}</span></p>
         <p><span class="label label-default" ng-show="controller.boardState.connecting" >{{controller.boardState.port}}</span></p>
-        <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting">Conecta tu tarjeta Firstmakers</span></p>
-        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false">Connectar</button>
-        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && false">Desconectar</button>
+        <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting" translate>CONNECT_FIRSTMAKERS</span></p>
+        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false" translate>CONNECT</button>
+        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && false" translate>DISCONNECT</button>
       </div>
     </div>
     
@@ -88,8 +88,9 @@
      <div class="footer">
        <p>Firstmakers</p>
     </div>
-    <button ng-click="controller.softReset()" type="button" class="btn btn-default">Soft reset</button>
-
+    <button ng-click="controller.softReset()" type="button" class="btn btn-default" translate>SOFT_RESET</button>
+    <button ng-click="controller.changeLanguage('es')"  class="btn btn-default" ng-class="{'btn-primary': controller.selectedLanguage == 'es'}" translate="BUTTON_LANG_ES"></button>
+    <button ng-click="controller.changeLanguage('en')"  class="btn btn-default" ng-class="{'btn-primary': controller.selectedLanguage == 'en'}" translate="BUTTON_LANG_EN"></button>
 
 
   </div><!-- container -->
@@ -110,7 +111,12 @@
     <script src="./bower_components/google-blockly/blockly_compressed.js"></script>
     <script src="./bower_components/google-blockly/blocks_compressed.js"></script>
     <script src="./bower_components/google-blockly/javascript_compressed.js"></script>
-    <script src="./bower_components/google-blockly/msg/js/es.js"></script>
+    <script2 src="./bower_components/google-blockly/msg/js/es.js"></script2>
+    <script src="./bower_components/angular-translate/angular-translate.js"></script>
+    <script src="./bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="./bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="./bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <script src="./external_module_wrapper.js"></script>
     <script src="./acorn.js"></script>
     <script src="./interpreter.js"></script>
@@ -119,12 +125,14 @@
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="app.js"></script>
+    <script src="app.blocks.initialization.js"></script>
     <script src="controller.js"></script>
     <script src="services/service.js"></script>
-    <script src="services/firstmakers.service.js"></script>    
+    <script src="services/blockly.service.js"></script>    
     <script src="services/board.service.js"></script>
     <script src="services/virtualBoard.service.js"></script>    
     <script src="services/device.service.js"></script>    
+    <script src="services/deviceCommand.service.js"></script>    
     <script src="services/serial.service.js"></script>
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>

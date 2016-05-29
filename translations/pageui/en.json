@@ -1,0 +1,18 @@
+{
+  "BLOCKLY_VERSION" : "(Blockly version)",
+  "CODE_RUN" : "Run the code",
+  "VIRTUAL_BOARD" : "Virtual board",
+  "VIRTUAL_BOARD_MSG" : "Your program will work with the following virtual board for limited testing.",
+  "VIRTUAL_BOARD_MSG_2" : "But the experience is much better with a real board.",
+  "CONNECT_FIRSTMAKERS" : "Connect your Firstmakers board.",
+  "CONNECT" : "Connect",
+  "DISCONNECT" : "Disconnect",
+  "SOFT_RESET" : "Reset",
+  "STATUS_MESSAGE_CONNECTING" : "Connecting board",
+  "STATUS_MESSAGE_NOT_CONNECTED" : "No board connected",
+  "STATUS_MESSAGE_CONNECTED" : "Connected board",
+  "BUTTON_LANG_ES" : "Spanish",
+  "BUTTON_LANG_EN" : "English",
+  
+  "__DUMMY__" : "no trailing comma"
+}
