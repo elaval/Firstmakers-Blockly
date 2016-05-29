@@ -85,10 +85,12 @@ function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialServic
   }
 
   
-  function getOptions() {
+  function getOptions(toolboxPath) {
     var deferred = $q.defer();
     
-    $templateRequest("./blocks.xml")
+    toolboxPath = toolboxPath ? toolboxPath : "./blocks.xml";
+    
+    $templateRequest(toolboxPath)
     .then(function(toolboxXML) {
       // Build toolbok
       var options = {
@@ -101,7 +103,7 @@ function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialServic
           maxScale: 3,
           minScale: 0.3,
           scaleSpeed: 1.2},
-      trashcan: true};
+        trashcan: true};
       
       deferred.resolve(options);
     });
@@ -167,6 +169,22 @@ function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialServic
    */
   function initApi(interpreter, scope) {
     var wrapper;
+    
+    // Add an API function for the alert() block.
+    wrapper = function(text) {
+      text = text ? text.toString() : '';
+      return interpreter.createPrimitive(alert(text));
+    };
+    interpreter.setProperty(scope, 'alert',
+        interpreter.createNativeFunction(wrapper));
+
+    // Add an API function for the prompt() block.
+    wrapper = function(text) {
+      text = text ? text.toString() : '';
+      return interpreter.createPrimitive(prompt(text));
+    };
+    interpreter.setProperty(scope, 'prompt',
+        interpreter.createNativeFunction(wrapper));
     
     // light(state)
     wrapper = function(state) {

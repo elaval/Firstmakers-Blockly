@@ -12,7 +12,18 @@
   "STATUS_MESSAGE_NOT_CONNECTED" : "Tarjeta no conectada",
   "STATUS_MESSAGE_CONNECTED" : "Tarjeta conectada",
   "BUTTON_LANG_ES" : "Español",
-  "BUTTON_LANG_EN" : "Inglés",
-
+  "BUTTON_LANG_EN" : "English",
+  "BUTTON_CLEAR_BLOCKS" :"Borrar bloques",
+  "CONFIRM_CLEAR_MSG" : "¿Seguro que desea eliminar todos los bloques?",
+  "CAT_CONTROL" : "Control",
+  "CAT_LOGIC" : "Lógica",
+  "CAT_MATH" : "Matemática",
+  "CAT_FIRSTMAKERS" : "Firstmakers",
+  "CAT_VARIABLES" : "Variables",
+  "CAT_FUNCTIONS" : "Funciones",
+  "CAT_TEXT" : "Texto",
+  "CAT_COLOR" : "Color",
+  "CAT_LISTS" : "Listas",
+  
   "__DUMMY__" : "no trailing comma"
 }

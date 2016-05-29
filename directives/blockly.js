@@ -18,7 +18,8 @@ angular.module("tideApp")
       template: '<div style="height:80vh"; width: 100%; resize:both; class="ng-blockly"></div>',
       scope: {
         options:"=options",    // Blockly options definition (input)
-        workspace:"=workspace" // Blockly workspace (output)
+        workspace:"=workspace", // Blockly workspace (output)
+        onInjected: "=onInjected" // Function called after Blockly injection
       },
       link: function (scope, element, attrs) {
         var verticalMargin = 200;
@@ -30,6 +31,7 @@ angular.module("tideApp")
             
             // Inject new blockly ui
             scope.workspace = Blockly.inject(element.children()[0], options);
+            if (scope.onInjected) scope.onInjected(scope.workspace);
           }
         }
  

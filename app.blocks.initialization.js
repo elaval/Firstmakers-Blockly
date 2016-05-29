@@ -5,6 +5,17 @@
 */
 angular.module('tideApp')
 .run(function() {
+  var COLOR_Lists = 20;
+  var COLOR_Control = 120;
+  var COLOR_Text = 160;
+  var COLOR_Firstmakers = 245;
+  var COLOR_Logic = 210;
+  var COLOR_Math = 230;
+  var COLOR_Color = 260;
+  var COLOR_Functions = 290;
+  var COLOR_Variables = 330;
+    
+
   
   /**
    * Definition of firstmakers blocks
@@ -20,7 +31,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_SAY_HI_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(260);
+      this.setColour(COLOR_Text);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -38,7 +49,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(260);
+      this.setColour(COLOR_Firstmakers);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -56,7 +67,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(260);
+      this.setColour(COLOR_Firstmakers);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -74,7 +85,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(260);
+      this.setColour(COLOR_Control);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -86,4 +97,18 @@ angular.module('tideApp')
     return code;
   };
   
+  /**
+   * Color codes
+   * 
+      20 - LISTS
+      80 - Firstmakers
+      120 - Loops
+      160 - Text
+      210 - Logic
+      230 - Math
+      260 - COLOR
+      290 - FUNCTIONS
+      330 - VARIABLES
+
+   */
 });

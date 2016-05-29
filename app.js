@@ -25,25 +25,11 @@ angular.module('tideApp')
   .preferredLanguage('es')
   .fallbackLanguage(['en', 'es'])
   .useLocalStorage();
+  
+  Blockly.HSV_SATURATION = 0.8;
+  Blockly.HSV_VALUE = 0.8;
 
 }]);
 
-angular.module('tideApp')
-.config(['$windowProvider','$translateProvider',function($windowProvider, $translateProvider) {
-  
-   
-  var $window = $windowProvider.$get();
-
-  var langKey = $window.localStorage[$translateProvider.storageKey()];
-  
-  if (!langKey) langKey = "es";
-
-  // Load the language strings.
-
-  // Load Blockly's language strings.
-  //$('body').append('<script type="application/javascript" src="./bower_components/google-blockly/msg/js/'+langKey+'.js"></script>');
-  //$('body').append('<script type="application/javascript" src="./msg/'+langKey+'.js"></script>');
-
-}])
 
 

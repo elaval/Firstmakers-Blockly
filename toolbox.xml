@@ -1,0 +1,39 @@
+<xml id="toolbox" style="display: none">
+  <category name="CAT_CONTROL" colour="120">
+    <block type="wait"></block> 
+    <block type="controls_repeat_ext"></block>
+    <block type="controls_whileUntil"></block>
+  </category>
+  <category name="CAT_LOGIC" colour="210">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_boolean"></block>
+    <block type="logic_negate"></block>
+  </category>
+  <category name="CAT_MATH" colour="230">
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+  </category>
+  <category name="CAT_FIRSTMAKERS" colour="245" >
+    <block type="light_on"></block>      
+    <block type="light_off"></block> 
+  </category>
+  <category name="CAT_TEXT"  colour="160" >
+     <block type="text"></block>  
+     <block type="text_prompt"></block>     
+  </category>
+  <category name="CAT_COLOR"  colour="260" >
+     <block type="colour_picker"></block>  
+  </category>
+  <category name="CAT_LISTS"  colour="20" >
+     <block type="lists_repeat"></block>  
+     <block type="lists_create_with"></block>  
+  </category>
+  <category name="CAT_VARIABLES" custom="VARIABLE" colour="330" ></category>
+  <category name="CAT_FUNCTIONS" custom="PROCEDURE" colour="290" ></category>
+</xml>
+
+
+
+

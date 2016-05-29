@@ -1,8 +1,0 @@
-<xml>
-  <block type="light_on"></block>      
-  <block type="light_off"></block>   
-  <block type="wait"></block>   
-  <block type="controls_repeat_ext"></block>
-  <block type="math_number"></block>
-  <block type="say_hi"></block>          
-</xml>
