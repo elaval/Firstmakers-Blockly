@@ -24,6 +24,7 @@
   "CAT_TEXT" : "Text",
   "CAT_COLOR" : "Color",
   "CAT_LISTS" : "Lists",
+  "CAT_INTERNET" : "Internet",
 
   
   "__DUMMY__" : "no trailing comma"

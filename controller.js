@@ -309,10 +309,19 @@ angular.module('tideApp')
             // Successful connection with first port!! (Yeah)
             myself.physicalBoard = board;
             
+            
             board.analogRead(5, function(value) {
                 myself.physicalBoard.pins[board.analogPins[5]].value = value;
                 pinState[5] = value;
             })
+            
+            board.analogRead(0, function(value) {
+                myself.physicalBoard.pins[board.analogPins[0]].value = value;
+                pinState[0] = value;
+            })
+
+            
+
             
             physicalDevice = DeviceService.createDevice(myself.physicalBoard);
             DeviceCommandService.setPhysicalDevice(physicalDevice);

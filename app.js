@@ -26,8 +26,6 @@ angular.module('tideApp')
   .fallbackLanguage(['en', 'es'])
   .useLocalStorage();
   
-  Blockly.HSV_SATURATION = 0.8;
-  Blockly.HSV_VALUE = 0.8;
   
   Blockly.WorkspaceSvg.prototype.preloadAudio_ = function() {
     console.log("Sounds : ", JSON.stringify(this.SOUNDS_)); 

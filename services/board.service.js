@@ -121,7 +121,6 @@ angular.module('tideApp')
               arduino.board.sp.on('close', arduino.closeHandler);
               arduino.board.sp.on('error', arduino.errorHandler);
 
-              //world.Arduino.lockPort(port);      
               $timeout(0).then(function() {
                 arduino.port = arduino.board.sp.path;
                 arduino.connecting = false;

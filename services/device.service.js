@@ -35,14 +35,22 @@ angular.module('tideApp')
     device.potentiometer = function() {
       var deferred = $q.defer();
       
-      board.analogRead(5, function(value) {
-        deferred.resolve(value);
-      })
+      
+      deferred.resolve(valueConverter.potentiometer(board.pins[19].value));
+
       return deferred.promise;
     }
     
       
     return device;
+  }
+  
+  var valueConverter = {
+    potentiometer : function(rawValue) {
+      var value = Math.floor(100*rawValue/1023);
+      
+      return value; 
+    }
   }
   
 }])

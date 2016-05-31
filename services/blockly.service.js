@@ -170,7 +170,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
   function initApi(interpreter, scope) {
     var wrapper;
     
-    
+    // Add an API function for the getXhr() block.
     var wrapper = function getXhr(href, callback) {
       
       href = href ? href.toString() : '';
@@ -205,12 +205,10 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'prompt',
         interpreter.createNativeFunction(wrapper));
     
-    // potentiometer()
-    
+    // Add an API function for the potentiometer() block.
     wrapper = function(callback) {  
       DeviceCommandService.potentiometer()
       .then(function(value) {
-        $log.debug("potentiometer", value);
         callback(interpreter.createPrimitive(value));
       })
     };
@@ -218,32 +216,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_potentiometer',
         interpreter.createAsyncFunction(wrapper));
         
-/*
-    wrapper = function(num) {
-      num = num ? num.toNumber() : 0;
-      return interpreter.createPrimitive(Math.abs(num));
-    }
-    
-    interpreter.setProperty(scope, 'Math_random',
-        interpreter.createNativeFunction(wrapper),false, true);
-*/
-      
-    wrapper = function(num, callback) {
-      num = num ? num.toNumber() : 0;
-      callback(interpreter.createPrimitive(Math.abs(num)));
-    }
-    
-    interpreter.setProperty(scope, 'Math_random',
-        interpreter.createAsyncFunction(wrapper),false, true);
 
-        
-    wrapper = function(callback) { 
-      return "512"; 
-    };
-    
-    interpreter.setProperty(scope, 'fm_dummy',
-        interpreter.createPrimitive(wrapper));
-    
     // light(state)
     wrapper = function(state) {
       state = state ? state.toBoolean() : true;

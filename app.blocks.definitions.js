@@ -1,4 +1,10 @@
 'use strict';
+
+goog.provide('Blockly.Blocks.firstmakers');
+goog.provide('Blockly.Blocks.internet');
+
+goog.require('Blockly.Blocks');
+
 /**
 * @ngdoc object
 * @description
@@ -8,13 +14,38 @@ angular.module('tideApp')
   var COLOR_Lists = 20;
   var COLOR_Control = 120;
   var COLOR_Text = 160;
-  var COLOR_Firstmakers = 245;
-  var COLOR_Logic = 210;
+  //var Blockly.Blocks.firstmakers.HUE = 245;
+  var COLOR_Logic = 65;
   var COLOR_Math = 230;
   var COLOR_Color = 260;
   var COLOR_Functions = 290;
   var COLOR_Variables = 330;
-    
+  
+  Blockly.HSV_SATURATION = 0.8;
+  Blockly.HSV_VALUE = 0.8;
+  
+  // Original colours:
+  // Blockly.Blocks.colour.HUE = 20;
+  // Blockly.Blocks.lists.HUE = 260;
+  // Blockly.Blocks.logic.HUE = 210;
+  // Blockly.Blocks.loops.HUE = 120;
+  // Blockly.Blocks.math.HUE = 230;
+  // Blockly.Blocks.procedures.HUE = 290;
+  // Blockly.Blocks.texts.HUE = 160;
+  
+  Blockly.Blocks.variables.HUE = 330;
+  Blockly.Blocks.colour.HUE = 20;
+  Blockly.Blocks.lists.HUE = 260;
+  Blockly.Blocks.logic.HUE = 185;
+  Blockly.Blocks.loops.HUE = 120;
+  Blockly.Blocks.math.HUE = 230;
+  Blockly.Blocks.procedures.HUE = 290;
+  Blockly.Blocks.texts.HUE = 160;
+  Blockly.Blocks.variables.HUE = 330;
+  
+  Blockly.Blocks.firstmakers.HUE = 210
+  Blockly.Blocks.internet.HUE = 100
+
 
   
   /**
@@ -31,7 +62,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_SAY_HI_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Text);
+      this.setColour(Blockly.Blocks.texts.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -51,7 +82,7 @@ angular.module('tideApp')
       this.appendValueInput("CONTENT")
           .setCheck(null)
           .appendField(Blockly.Msg.FIRSTMAKERS_MESSAGE);
-      this.setColour(65);
+      this.setColour(Blockly.Blocks.texts.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP);
       this.setHelpUrl('http://www.example.com/');
     }
@@ -82,7 +113,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Control);
+      this.setColour(Blockly.Blocks.loops.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -100,7 +131,7 @@ angular.module('tideApp')
       this.appendDummyInput()
           .appendField(Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TITLE, 'title');
       this.setOutput(true, 'Number');      
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     },
@@ -114,74 +145,6 @@ angular.module('tideApp')
     var code = 'fm_potentiometer()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
-  
-  
-  Blockly.Blocks['dummy'] = {
-  /**
-   * Block for text value.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
-    this.setColour(Blockly.Blocks.texts.HUE);
-    this.appendDummyInput()
-        .appendField(this.newQuote_(true))
-        .appendField(new Blockly.FieldTextInput(''), 'TEXT')
-        .appendField(this.newQuote_(false));
-    this.setOutput(true, 'String');
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    // Text block is trivial.  Use tooltip of parent block if it exists.
-    this.setTooltip(function() {
-      var parent = thisBlock.getParent();
-      return (parent && parent.getInputsInline() && parent.tooltip) ||
-          Blockly.Msg.TEXT_TEXT_TOOLTIP;
-    });
-  },
-  /**
-   * Create an image of an open or closed quote.
-   * @param {boolean} open True if open quote, false if closed.
-   * @return {!Blockly.FieldImage} The field image of the quote.
-   * @this Blockly.Block
-   * @private
-   */
-  newQuote_: function(open) {
-    if (open == this.RTL) {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAqUlEQVQI1z3KvUpCcRiA8ef9E4JNHhI0aFEacm1o0BsI0Slx8wa8gLauoDnoBhq7DcfWhggONDmJJgqCPA7neJ7p934EOOKOnM8Q7PDElo/4x4lFb2DmuUjcUzS3URnGib9qaPNbuXvBO3sGPHJDRG6fGVdMSeWDP2q99FQdFrz26Gu5Tq7dFMzUvbXy8KXeAj57cOklgA+u1B5AoslLtGIHQMaCVnwDnADZIFIrXsoXrgAAAABJRU5ErkJggg==';
-    } else {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC';
-    }
-    return new Blockly.FieldImage(file, 12, 12, '"');
-  }
-};
-    
-  
-  Blockly.JavaScript['dummy'] = function(block) {
-    var code = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
-    code = 'fm_dummy()';
-    return [code, Blockly.JavaScript.ORDER_ATOMIC];
-  };
-  
-  Blockly.Blocks['math_random_float2'] = {
-  /**
-   * Block for random fraction between 0 and 1.
-   * @this Blockly.Block
-   */
-  init: function() {
-      this.jsonInit({
-        "message0": Blockly.Msg.MATH_RANDOM_FLOAT_TITLE_RANDOM,
-        "output": "Number",
-        "colour": Blockly.Blocks.math.HUE,
-        "tooltip": Blockly.Msg.MATH_RANDOM_FLOAT_TOOLTIP,
-        "helpUrl": Blockly.Msg.MATH_RANDOM_FLOAT_HELPURL
-      });
-    }
-  };
-  
-  Blockly.JavaScript['math_random_float2'] = function(block) {
-    // Random fraction between 0 and 1.
-    return ['Math_random(4)', Blockly.JavaScript.ORDER_FUNCTION_CALL];
-  };
     
   Blockly.Blocks['light_on'] = {
     init: function() {
@@ -189,7 +152,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -207,7 +170,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -225,7 +188,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_BUZZER_ON_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_BUZZER_ON_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -243,7 +206,7 @@ angular.module('tideApp')
           .appendField(Blockly.Msg.FIRSTMAKERS_BUZZER_OFF_TITLE);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_BUZZER_OFF_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -261,7 +224,7 @@ angular.module('tideApp')
       this.appendDummyInput()
           .appendField("getXhr");
       this.setOutput(true, 'Text');
-      this.setColour(COLOR_Firstmakers);
+      this.setColour(Blockly.Blocks.internet.HUE);
       this.setTooltip("getXhr");
       this.setHelpUrl('http://www.firstmakers.com/');
     }
@@ -275,20 +238,4 @@ angular.module('tideApp')
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
-
-  
-  /**
-   * Color codes
-   * 
-      20 - LISTS
-      80 - Firstmakers
-      120 - Loops
-      160 - Text
-      210 - Logic
-      230 - Math
-      260 - COLOR
-      290 - FUNCTIONS
-      330 - VARIABLES
-
-   */
 });
