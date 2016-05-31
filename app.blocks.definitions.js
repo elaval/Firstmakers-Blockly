@@ -125,7 +125,9 @@ angular.module('tideApp')
     return code;
   };
   
-  
+  // -----------
+  // Potentiometer
+  // -----------
   Blockly.Blocks['potentiometer'] = {
     init: function() {
       this.appendDummyInput()
@@ -135,8 +137,8 @@ angular.module('tideApp')
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
     },
-    customUpdate: function(updateScope) {
-      var value = updateScope &&  updateScope.potentiometer;
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.potentiometer;
       this.setFieldValue(Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TITLE +" (" + value +")", 'title');
     }
   };
@@ -145,7 +147,58 @@ angular.module('tideApp')
     var code = 'fm_potentiometer()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
+      
+  // -----------    
+  // Temperature
+  // -----------
+  Blockly.Blocks['temperature'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TITLE, 'title');
+      this.setOutput(true, 'Number');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.temperature;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TITLE +" (" + value +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['temperature'] = function(block) {
+    var code = 'fm_temperature()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };
     
+  // ------    
+  // button
+  // ------
+  Blockly.Blocks['button'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE, 'title');
+      this.setOutput(true, 'Boolean');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_BUTTON_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.button;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE +" (" + value +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['button'] = function(block) {
+    var code = 'fm_button()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };
+  
+  // -----------
+  // light_on
+  // -----------
   Blockly.Blocks['light_on'] = {
     init: function() {
       this.appendDummyInput()
@@ -164,6 +217,9 @@ angular.module('tideApp')
     return code;
   };
   
+  // -----------
+  // light_off
+  // -----------
   Blockly.Blocks['light_off'] = {
     init: function() {
       this.appendDummyInput()

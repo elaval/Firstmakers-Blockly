@@ -92,21 +92,30 @@ angular.module('tideApp')
     // ==================================
     
     $interval(function() {
+
         updateBlocks();
     }, 100);
+    
+
     
     /**
      * updates customValues in blocks
      */
     function updateBlocks() {
-        var sensorManager = firstmakersSensor().setBoard(myself.physicalBoard);
-        
-        var updateScope = {
-            potentiometer : sensorManager.potentiometer()
-        }
-        var blocks = myself.workspace.getAllBlocks();
-        for (var i = 0, block; block = blocks[i]; i++) {
-            block.customUpdate && block.customUpdate(updateScope);
+        if (physicalDevice) {
+            if (myself.physicalBoard) {
+                myself.physicalBoard.digitalRead(2, function(value) {
+                    physicalDevice.sensorValues().button = value === myself.physicalBoard.HIGH; 
+
+                })
+                console.log(myself.physicalBoard.pins[2]);
+            }
+                
+            
+            var blocks = myself.workspace.getAllBlocks();
+            for (var i = 0, block; block = blocks[i]; i++) {
+                block.updateSensor && block.updateSensor(physicalDevice.sensorValues());
+            }
         }
     }
 
@@ -308,22 +317,10 @@ angular.module('tideApp')
         .then(function(board) {
             // Successful connection with first port!! (Yeah)
             myself.physicalBoard = board;
-            
-            
-            board.analogRead(5, function(value) {
-                myself.physicalBoard.pins[board.analogPins[5]].value = value;
-                pinState[5] = value;
-            })
-            
-            board.analogRead(0, function(value) {
-                myself.physicalBoard.pins[board.analogPins[0]].value = value;
-                pinState[0] = value;
-            })
-
-            
-
-            
+             
             physicalDevice = DeviceService.createDevice(myself.physicalBoard);
+            physicalDevice.activatePinMonitor();
+            
             DeviceCommandService.setPhysicalDevice(physicalDevice);
             
             myself.boardState.connecting = false;
@@ -415,6 +412,7 @@ angular.module('tideApp')
         
         physicalDevice = null;
         DeviceCommandService.setPhysicalDevice(physicalDevice);
+        myself.physicalBoard = null;
         
         scanPorts();
         $log.debug(a);

@@ -170,7 +170,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
   function initApi(interpreter, scope) {
     var wrapper;
     
-    // Add an API function for the getXhr() block.
+    // getXhr() block.
     var wrapper = function getXhr(href, callback) {
       
       href = href ? href.toString() : '';
@@ -189,7 +189,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
         interpreter.createAsyncFunction(wrapper));
     
     
-    // Add an API function for the alert() block.
+    // alert() block.
     wrapper = function(text) {
       text = text ? text.toString() : '';
       return interpreter.createPrimitive(alert(text));
@@ -197,7 +197,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'alert',
         interpreter.createNativeFunction(wrapper));
 
-    // Add an API function for the prompt() block.
+    // prompt() block.
     wrapper = function(text) {
       text = text ? text.toString() : '';
       return interpreter.createPrimitive(prompt(text));
@@ -205,7 +205,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'prompt',
         interpreter.createNativeFunction(wrapper));
     
-    // Add an API function for the potentiometer() block.
+    // potentiometer() block.
     wrapper = function(callback) {  
       DeviceCommandService.potentiometer()
       .then(function(value) {
@@ -215,8 +215,27 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     
     interpreter.setProperty(scope, 'fm_potentiometer',
         interpreter.createAsyncFunction(wrapper));
+    
+    // temperature() block.
+    wrapper = function() {  
+      var value = DeviceCommandService.temperature();
+      return interpreter.createPrimitive(value);
+    };
+    
+    interpreter.setProperty(scope, 'fm_temperature',
+        interpreter.createNativeFunction(wrapper));
         
-
+    // fm_button()
+    wrapper = function(callback) {  
+      DeviceCommandService.button()
+      .then(function(value) {
+        callback(interpreter.createPrimitive(value));
+      })
+    };
+    
+    interpreter.setProperty(scope, 'fm_button',
+        interpreter.createAsyncFunction(wrapper));
+        
     // light(state)
     wrapper = function(state) {
       state = state ? state.toBoolean() : true;

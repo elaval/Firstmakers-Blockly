@@ -24,6 +24,8 @@ angular.module('tideApp')
   myself.light = light;
   myself.buzzer = buzzer;
   myself.potentiometer = potentiometer;
+  myself.temperature = temperature;
+  myself.button = button;
   
   // Local variables
   var physicalDevice = null;
@@ -73,6 +75,16 @@ angular.module('tideApp')
     
   }
   
+  function temperature() {
+    if (physicalDevice) {
+      return physicalDevice.temperature()
+    } else if (virtualDevice) {
+      return 0;
+    } else {
+      deferred.reject("No board");
+    }
+  }
+  
   function potentiometer() {
     var deferred = $q.defer();
     
@@ -87,6 +99,27 @@ angular.module('tideApp')
     } else if (virtualDevice) {
       //virtualDevice.buzzer(state);
       deferred.resolve(0);
+    } else {
+      deferred.reject("No board");
+    }
+  
+    return deferred.promise;
+  }
+  
+  function button() {
+    var deferred = $q.defer();
+    
+    if (physicalDevice) {
+      physicalDevice.button()
+      .then(function(value) {
+        deferred.resolve(value);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+    } else if (virtualDevice) {
+      //virtualDevice.buzzer(state);
+      deferred.resolve(false);
     } else {
       deferred.reject("No board");
     }

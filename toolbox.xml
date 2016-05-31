@@ -38,6 +38,8 @@
     <block type="buzzer_on"></block>      
     <block type="buzzer_off"></block> 
     <block type="potentiometer"></block> 
+    <block type="temperature"></block> 
+    <block type="button"></block> 
   </category>
   <category name="CAT_TEXT"  colour="160" >
      <block type="say"></block>  
