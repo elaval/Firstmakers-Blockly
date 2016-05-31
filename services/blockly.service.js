@@ -15,8 +15,8 @@
  *
  */
 angular.module('tideApp')
-.service('BlocklyService',['$rootScope','$q','$templateRequest', 'd3', '_', '$http', '$timeout', 'SerialService', 'BoardService','VirtualBoardService', 'DeviceCommandService',
-function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialService, BoardService, VirtualBoardService, DeviceCommandService) {
+.service('BlocklyService',['$rootScope','$q','$templateRequest','$log', 'd3', '_', '$http', '$timeout', 'SerialService', 'BoardService','VirtualBoardService', 'DeviceCommandService',
+function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialService, BoardService, VirtualBoardService, DeviceCommandService) {
   var myself = this;
  
   // Public functions
@@ -170,6 +170,25 @@ function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialServic
   function initApi(interpreter, scope) {
     var wrapper;
     
+    
+    var wrapper = function getXhr(href, callback) {
+      
+      href = href ? href.toString() : '';
+      $log.debug(href)
+      var req = new XMLHttpRequest();
+      req.open('GET', href, true);
+      req.onreadystatechange = function() {
+        if (req.readyState == 4 && req.status == 200) {
+          $log.debug(req.reponseText)
+          callback(interpreter.createPrimitive("req.responseText"));
+        }
+      };
+      req.send(null);
+    };
+    interpreter.setProperty(scope, 'getXhr',
+        interpreter.createAsyncFunction(wrapper));
+    
+    
     // Add an API function for the alert() block.
     wrapper = function(text) {
       text = text ? text.toString() : '';
@@ -186,12 +205,59 @@ function($rootScope, $q, $templateRequest, d3,_, $http, $timeout ,  SerialServic
     interpreter.setProperty(scope, 'prompt',
         interpreter.createNativeFunction(wrapper));
     
+    // potentiometer()
+    
+    wrapper = function(callback) {  
+      DeviceCommandService.potentiometer()
+      .then(function(value) {
+        $log.debug("potentiometer", value);
+        callback(interpreter.createPrimitive(value));
+      })
+    };
+    
+    interpreter.setProperty(scope, 'fm_potentiometer',
+        interpreter.createAsyncFunction(wrapper));
+        
+/*
+    wrapper = function(num) {
+      num = num ? num.toNumber() : 0;
+      return interpreter.createPrimitive(Math.abs(num));
+    }
+    
+    interpreter.setProperty(scope, 'Math_random',
+        interpreter.createNativeFunction(wrapper),false, true);
+*/
+      
+    wrapper = function(num, callback) {
+      num = num ? num.toNumber() : 0;
+      callback(interpreter.createPrimitive(Math.abs(num)));
+    }
+    
+    interpreter.setProperty(scope, 'Math_random',
+        interpreter.createAsyncFunction(wrapper),false, true);
+
+        
+    wrapper = function(callback) { 
+      return "512"; 
+    };
+    
+    interpreter.setProperty(scope, 'fm_dummy',
+        interpreter.createPrimitive(wrapper));
+    
     // light(state)
     wrapper = function(state) {
       state = state ? state.toBoolean() : true;
       return interpreter.createPrimitive(DeviceCommandService.light(state));
     };
     interpreter.setProperty(scope, 'fm_light',
+        interpreter.createNativeFunction(wrapper));
+
+    // buzzer(state)
+    wrapper = function(state) {
+      state = state ? state.toBoolean() : true;
+      return interpreter.createPrimitive(DeviceCommandService.buzzer(state));
+    };
+    interpreter.setProperty(scope, 'fm_buzzer',
         interpreter.createNativeFunction(wrapper));
 
     // say(text)

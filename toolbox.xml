@@ -14,12 +14,23 @@
   <category name="CAT_MATH" colour="230">
     <block type="math_number"></block>
     <block type="math_arithmetic"></block>
+    <block type="math_random_float2"></block>
+    <block type="math_constant"></block>
+    <block type="math_single"></block>
+    
   </category>
   <category name="CAT_FIRSTMAKERS" colour="245" >
     <block type="light_on"></block>      
     <block type="light_off"></block> 
+    <block type="buzzer_on"></block>      
+    <block type="buzzer_off"></block> 
+    <block type="potentiometer"></block> 
+    <block type="dummy"></block> 
+    <block type="getXhr"></block> 
   </category>
   <category name="CAT_TEXT"  colour="160" >
+     <block type="say"></block>  
+     <block type="say_hi"></block>  
      <block type="text"></block>  
      <block type="text_prompt"></block>     
   </category>

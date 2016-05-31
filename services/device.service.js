@@ -28,6 +28,20 @@ angular.module('tideApp')
         board.digitalWrite(13, on ? board.HIGH : board.LOW);
     }
       
+    device.buzzer = function(on) {
+        board.digitalWrite(6, on ? board.HIGH : board.LOW);
+    }
+    
+    device.potentiometer = function() {
+      var deferred = $q.defer();
+      
+      board.analogRead(5, function(value) {
+        deferred.resolve(value);
+      })
+      return deferred.promise;
+    }
+    
+      
     return device;
   }
   

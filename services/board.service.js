@@ -23,7 +23,9 @@ angular.module('tideApp')
   myself.disconnect = disconnect;
   myself.detectPort = detectPort;
   myself.detectPorts = detectPorts;
+  myself.analogRead = analogRead;
   myself.light = light;
+  myself.buzzer = buzzer;
   myself.isBoardReady = isBoardReady;
   
   var Board = require("firmata");
@@ -50,6 +52,21 @@ angular.module('tideApp')
   function light(state) {
     var value = arduino.board.pins[13].value;
     arduino.board.digitalWrite(13, state ? 1 : 0);
+  }
+  
+  function buzzer(state) {
+    var value = arduino.board.pins[6].value;
+    arduino.board.digitalWrite(6, state ? 1 : 0);
+  }
+  
+  function analogRead(pin) {
+      var deferred = $q.defer();
+      
+      arduino.board.analogRead(pin, function(value) {
+          deferred.resolve(value);
+      });
+      
+      return deferred.promise;
   }
   
   function detectPorts() {
