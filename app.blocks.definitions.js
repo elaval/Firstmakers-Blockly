@@ -69,8 +69,7 @@ angular.module('tideApp')
   };
   
   Blockly.JavaScript['say_hi'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = 'fm_say(getXhr("https://raw.githubusercontent.com/Caged/d3-tip/master/.gitignore"));\n';
+    var code = 'fm_say("'+ Blockly.Msg.FIRSTMAKERS_HI +'");\n';
     return code;
   };
   
@@ -187,7 +186,8 @@ angular.module('tideApp')
     },
     updateSensor: function(sensorValues) {
       var value = sensorValues &&  sensorValues.button;
-      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE +" (" + value +")", 'title');
+      var stateMsg = value ? Blockly.Msg.FIRSTMAKERS_BUTTON_ON : Blockly.Msg.FIRSTMAKERS_BUTTON_OFF;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE +" (" + stateMsg +")", 'title');
     }
   };
   

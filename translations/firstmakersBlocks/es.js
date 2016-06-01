@@ -16,6 +16,7 @@ Blockly.Msg.FIRSTMAKERS_SAY_HI_TITLE = "decir hola";
 Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP = "decir hola";
 Blockly.Msg.FIRSTMAKERS_SAY_TITLE = "decir";
 Blockly.Msg.FIRSTMAKERS_SAY_TOOLTIP = "decir";
+Blockly.Msg.FIRSTMAKERS_HI = "Hola!";
 Blockly.Msg.FIRSTMAKERS_BUZZER_ON_TITLE = "prender bocina";
 Blockly.Msg.FIRSTMAKERS_BUZZER_ON_TOOLTIP = "prender bocina (pin 6)";
 Blockly.Msg.FIRSTMAKERS_BUZZER_OFF_TITLE = "apagar bocina";
@@ -26,4 +27,7 @@ Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TITLE = 'temperatura';
 Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TOOLTIP = 'valor de temperatura (pin A0)';
 Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE = 'botón';
 Blockly.Msg.FIRSTMAKERS_BUTTON_TOOLTIP = 'valor de boton (pin 2)';
+Blockly.Msg.FIRSTMAKERS_BUTTON_ON = 'on';
+Blockly.Msg.FIRSTMAKERS_BUTTON_OFF = 'off';
+
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

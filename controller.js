@@ -137,6 +137,7 @@ angular.module('tideApp')
      * Resets the program 
      */
     function softReset() {
+        disconnectBoard();
         window.location.reload();
     }
     

@@ -27,7 +27,7 @@
   <category name="CAT_MATH" colour="230">
     <block type="math_number"></block>
     <block type="math_arithmetic"></block>
-    <block type="math_random_float2"></block>
+    <block type="math_random_float"></block>
     <block type="math_constant"></block>
     <block type="math_single"></block>
     
