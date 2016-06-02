@@ -29,5 +29,9 @@ Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE = 'botón';
 Blockly.Msg.FIRSTMAKERS_BUTTON_TOOLTIP = 'valor de boton (pin 2)';
 Blockly.Msg.FIRSTMAKERS_BUTTON_ON = 'on';
 Blockly.Msg.FIRSTMAKERS_BUTTON_OFF = 'off';
+Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TITLE = 'prender pin digital';
+Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TOOLTIP  = 'prender pin digital';
+Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TITLE = 'apagar pin digital';
+Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TOOLTIP  = 'apagar pin digital';
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

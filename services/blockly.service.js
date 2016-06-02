@@ -244,6 +244,16 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_light',
         interpreter.createNativeFunction(wrapper));
 
+    // light(state)
+    wrapper = function(pin,value) {
+      pin = pin ? pin.toNumber() : 13;
+      value = value ? value.toBoolean() : false;
+
+      return interpreter.createPrimitive(DeviceCommandService.digitalWrite(pin,value));
+    };
+    interpreter.setProperty(scope, 'fm_digitalWrite',
+        interpreter.createNativeFunction(wrapper));
+
     // buzzer(state)
     wrapper = function(state) {
       state = state ? state.toBoolean() : true;

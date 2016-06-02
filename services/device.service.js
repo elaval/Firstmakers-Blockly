@@ -92,6 +92,11 @@ angular.module('tideApp')
 
     }
 
+    
+    device.digitalWrite = function(pin,value) {
+        board.digitalWrite(pin, value ? board.HIGH : board.LOW);
+    }
+    
     device.light = function(on) {
         board.digitalWrite(13, on ? board.HIGH : board.LOW);
     }

@@ -274,6 +274,61 @@ angular.module('tideApp')
     return code;
   };
  
+  Blockly.Blocks['digital_pin_on'] = {
+    init: function() {
+      
+      var pins = [];
+      for (var i=0; i<=13; i++) {
+        pins.push([i+'',i+'']);
+      }     
+      var dropdownPin = new Blockly.FieldDropdown(pins);
+
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TITLE)
+          //.appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"]]), "PIN")
+
+          .appendField(dropdownPin, 'PIN')
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    }
+  };
+  
+  Blockly.JavaScript['digital_pin_on'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    var code = 'fm_digitalWrite('+pin+',true);\n';
+    return code;
+  };
+  
+    Blockly.Blocks['digital_pin_off'] = {
+    init: function() {
+      
+      var pins = [];
+      for (var i=0; i<=13; i++) {
+        pins.push([i+'',i+'']);
+      }     
+      var dropdownPin = new Blockly.FieldDropdown(pins);
+
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TITLE)
+          .appendField(dropdownPin, 'PIN')
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    }
+  };
+  
+  Blockly.JavaScript['digital_pin_off'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    var code = 'fm_digitalWrite('+pin+',false);\n';
+    return code;
+  };
  
  Blockly.Blocks['getXhr'] = {
     init: function() {

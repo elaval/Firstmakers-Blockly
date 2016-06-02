@@ -25,6 +25,7 @@
   "CAT_COLOR" : "Color",
   "CAT_LISTS" : "Listas",
   "CAT_INTERNET" : "Internet",
+  "CAT_ARDUINO" : "Arduino",
 
   
   "__DUMMY__" : "no trailing comma"

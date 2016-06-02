@@ -26,6 +26,7 @@ angular.module('tideApp')
   myself.potentiometer = potentiometer;
   myself.temperature = temperature;
   myself.button = button;
+  myself.digitalWrite = digitalWrite;
   
   // Local variables
   var physicalDevice = null;
@@ -51,6 +52,18 @@ angular.module('tideApp')
   /**
    * Implementations of "external" functions
    */
+  
+  function digitalWrite(pin,value) {
+    if (virtualDevice) {
+      virtualDevice.digitalWrite(pin,value);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.digitalWrite(pin,value);
+    }
+    
+  }
+  
         
   function light(state) {
     if (virtualDevice) {
