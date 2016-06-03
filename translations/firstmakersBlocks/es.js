@@ -33,5 +33,10 @@ Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TITLE = 'prender pin digital';
 Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_ON_TOOLTIP  = 'prender pin digital';
 Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TITLE = 'apagar pin digital';
 Blockly.Msg.FIRSTMAKERS_DIGITAL_PIN_OFF_TOOLTIP  = 'apagar pin digital';
+Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TITLE  = 'leer pin digital';
+Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TOOLTIP  = 'leer pin digital';
+Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TITLE  = 'leer pin analógico';
+Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TOOLTIP  = 'leer pin analógico';
+
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

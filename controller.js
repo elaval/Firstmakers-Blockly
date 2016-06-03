@@ -92,11 +92,9 @@ angular.module('tideApp')
     // ==================================
     
     $interval(function() {
-
         updateBlocks();
     }, 100);
     
-
     
     /**
      * updates customValues in blocks
@@ -104,13 +102,10 @@ angular.module('tideApp')
     function updateBlocks() {
         if (physicalDevice) {
             if (myself.physicalBoard) {
-                myself.physicalBoard.digitalRead(2, function(value) {
-                    physicalDevice.sensorValues().button = value === myself.physicalBoard.HIGH; 
-
-                })
-                console.log(myself.physicalBoard.pins[2]);
-            }
                 
+
+                
+            }
             
             var blocks = myself.workspace.getAllBlocks();
             for (var i = 0, block; block = blocks[i]; i++) {

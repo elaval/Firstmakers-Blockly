@@ -244,7 +244,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_light',
         interpreter.createNativeFunction(wrapper));
 
-    // light(state)
+    // digitalWrite(pin,state)
     wrapper = function(pin,value) {
       pin = pin ? pin.toNumber() : 13;
       value = value ? value.toBoolean() : false;
@@ -253,6 +253,31 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     };
     interpreter.setProperty(scope, 'fm_digitalWrite',
         interpreter.createNativeFunction(wrapper));
+
+    // digitalRead(pin).
+    wrapper = function(pin, callback) {  
+      pin = pin ? pin.toNumber() : 2;
+      DeviceCommandService.digitalRead(pin)
+      .then(function(value) {
+        callback(interpreter.createPrimitive(value));
+      })
+    };
+    
+    interpreter.setProperty(scope, 'fm_digitalRead',
+        interpreter.createAsyncFunction(wrapper));
+        
+    // analogRead(pin).
+    wrapper = function(pin, callback) {  
+      pin = pin ? pin.toNumber() : 0;
+      DeviceCommandService.analogRead(pin)
+      .then(function(value) {
+        callback(interpreter.createPrimitive(value));
+      })
+    };
+    
+    interpreter.setProperty(scope, 'fm_analogRead',
+        interpreter.createAsyncFunction(wrapper));
+
 
     // buzzer(state)
     wrapper = function(state) {

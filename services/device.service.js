@@ -47,7 +47,10 @@ angular.module('tideApp')
       'light': 0,
       'audio': 0,
       'humidity': 0,
-      'infrared': 0      
+      'infrared': 0,
+      'button':false,
+      'pins' : board.pins,
+      'analogPins' : board.analogPins      
     }
     
     device.sensorValues = function() {
@@ -80,12 +83,65 @@ angular.module('tideApp')
             sensorValues.potentiometer = valueConverter.potentiometer(value);
         })    
         
-        board.pinMode(2, board.MODES.INPUT);
-        /*
+        board.pinMode(2, board.MODES.INPUT);     
         board.digitalRead(2, function(value) {
-          $log.debug(value);
+            sensorValues.button = value === board.HIGH; 
         })
-        */
+ 
+        board.pinMode(3, board.MODES.INPUT);     
+        board.digitalRead(3, function(value) {
+            sensorValues.pins[3].value = value; 
+        })
+        
+        board.pinMode(4, board.MODES.INPUT);     
+        board.digitalRead(4, function(value) {
+            sensorValues.pins[4].value = value; 
+        })
+        
+        board.pinMode(5, board.MODES.INPUT);     
+        board.digitalRead(5, function(value) {
+            sensorValues.pins[5].value = value; 
+        })
+        
+        board.pinMode(6, board.MODES.INPUT);     
+        board.digitalRead(6, function(value) {
+            sensorValues.pins[6].value = value; 
+        })
+        
+        board.pinMode(7, board.MODES.INPUT);     
+        board.digitalRead(7, function(value) {
+            sensorValues.pins[7].value = value; 
+        })
+        
+        board.pinMode(8, board.MODES.INPUT);     
+        board.digitalRead(8, function(value) {
+            sensorValues.pins[8].value = value; 
+        })
+        
+        board.pinMode(9, board.MODES.INPUT);     
+        board.digitalRead(9, function(value) {
+            sensorValues.pins[9].value = value; 
+        })        
+        
+        board.pinMode(10, board.MODES.INPUT);     
+        board.digitalRead(10, function(value) {
+            sensorValues.pins[10].value = value; 
+        })  
+              
+        board.pinMode(11, board.MODES.INPUT);     
+        board.digitalRead(11, function(value) {
+            sensorValues.pins[11].value = value; 
+        })  
+              
+        board.pinMode(12, board.MODES.INPUT);     
+        board.digitalRead(12, function(value) {
+            sensorValues.pins[12].value = value; 
+        })        
+
+        board.pinMode(13, board.MODES.INPUT);     
+        board.digitalRead(13, function(value) {
+            sensorValues.pins[13].value = value; 
+        })
  
       }
 
@@ -94,10 +150,28 @@ angular.module('tideApp')
 
     
     device.digitalWrite = function(pin,value) {
+        board.pinMode(pin, board.MODES.OUTPUT);
         board.digitalWrite(pin, value ? board.HIGH : board.LOW);
     }
     
+    device.digitalRead = function(pin) {
+      var deferred = $q.defer(); 
+      
+      //board.pinMode(pin, board.MODES.INPUT);
+      deferred.resolve(board.pins[pin].value == board.HIGH);
+
+      return deferred.promise;
+    }    
+    
+    device.analogRead = function(pin) {
+      return $q(function(resolve, reject) {
+        var analogPin = board.analogPins[pin];
+        resolve(board.pins[analogPin].value);
+      });
+    }
+    
     device.light = function(on) {
+        board.pinMode(13, board.MODES.OUTPUT);
         board.digitalWrite(13, on ? board.HIGH : board.LOW);
     }
       

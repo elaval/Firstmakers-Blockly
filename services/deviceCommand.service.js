@@ -27,6 +27,8 @@ angular.module('tideApp')
   myself.temperature = temperature;
   myself.button = button;
   myself.digitalWrite = digitalWrite;
+  myself.digitalRead = digitalRead;
+  myself.analogRead = analogRead;
   
   // Local variables
   var physicalDevice = null;
@@ -53,6 +55,7 @@ angular.module('tideApp')
    * Implementations of "external" functions
    */
   
+  // digitalWrite
   function digitalWrite(pin,value) {
     if (virtualDevice) {
       virtualDevice.digitalWrite(pin,value);
@@ -63,6 +66,63 @@ angular.module('tideApp')
     }
     
   }
+  
+  // digitalRead
+  function digitalRead(pin) {
+    var deferred = $q.defer();
+    
+    if (physicalDevice) {
+      physicalDevice.digitalRead(pin)
+      .then(function(value) {
+        deferred.resolve(value);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+    } else if (virtualDevice) {
+      virtualDevice.digitalRead(pin)
+      .then(function(value) {
+        deferred.resolve(value);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+    } else {
+      deferred.reject("No board");
+    }
+  
+    return deferred.promise;
+  }
+  
+  // analogRead
+  function analogRead(pin) {
+    var deferred = $q.defer();
+    
+    if (physicalDevice) {
+      physicalDevice.analogRead(pin)
+      .then(function(value) {
+        deferred.resolve(value);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+    } else if (virtualDevice) {
+      virtualDevice.analogRead(pin)
+      .then(function(value) {
+        deferred.resolve(value);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+    } else {
+      deferred.reject("No board");
+    }
+  
+    return deferred.promise;
+  }
+  
+  
+  
   
         
   function light(state) {

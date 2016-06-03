@@ -303,7 +303,7 @@ angular.module('tideApp')
     return code;
   };
   
-    Blockly.Blocks['digital_pin_off'] = {
+  Blockly.Blocks['digital_pin_off'] = {
     init: function() {
       
       var pins = [];
@@ -328,6 +328,70 @@ angular.module('tideApp')
     var pin = block.getFieldValue('PIN');
     var code = 'fm_digitalWrite('+pin+',false);\n';
     return code;
+  };
+  
+  Blockly.Blocks['read_digital_pin'] = {
+    init: function() {
+      
+      var pins = [];
+      for (var i=0; i<=13; i++) {
+        pins.push([i+'',i+'']);
+      }     
+      var dropdownPin = new Blockly.FieldDropdown(pins);
+
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TITLE, 'title')
+          .appendField(dropdownPin, 'PIN')
+          .appendField("", 'valueFeedback')
+
+      this.setOutput(true, 'Boolean');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    },
+    updateSensor: function(sensorValues) {
+      var pin = this.getFieldValue('PIN');
+      var value = sensorValues &&  sensorValues.pins[pin].value;
+      this.setFieldValue(" (" + value +")", 'valueFeedback');
+    }
+  };
+  
+  Blockly.JavaScript['read_digital_pin'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    var code = 'fm_digitalRead('+pin+')';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];;
+  };
+  
+  Blockly.Blocks['read_analog_pin'] = {
+    init: function() {
+      
+      var pins = [];
+      for (var i=0; i<=5; i++) {
+        pins.push([i+'',i+'']);
+      }     
+      var dropdownPin = new Blockly.FieldDropdown(pins);
+
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TITLE, 'title')
+          .appendField(dropdownPin, 'PIN')
+          .appendField("", 'valueFeedback')
+
+      this.setOutput(true, 'Boolean');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    },
+    updateSensor: function(sensorValues) {
+      var pin = this.getFieldValue('PIN');
+      var value = sensorValues &&  sensorValues.pins[sensorValues.analogPins[pin]].value;
+      this.setFieldValue(" (" + value +")", 'valueFeedback');
+    }
+  };
+  
+  Blockly.JavaScript['read_analog_pin'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    var code = 'fm_analogRead('+pin+')';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];;
   };
  
  Blockly.Blocks['getXhr'] = {

@@ -21,10 +21,15 @@ angular.module('tideApp')
   var pins = {};
   
   myself.digitalWrite = digitalWrite
+  myself.digitalRead = digitalRead
   
   function digitalWrite(pin, value) {
       pins[pin] = value;  
       $rootScope.$broadcast("virtualFirstmakersChange", pins);
+  }
+  
+  function digitalRead(pin, callback) {
+      callback(pins[pin]);  
   }
 
   $rootScope.$broadcast("virtualFirstmakersChange", pins)
