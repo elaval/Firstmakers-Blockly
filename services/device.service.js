@@ -53,6 +53,12 @@ angular.module('tideApp')
       var value = Math.floor(100*rawValue/1023);
 
       return value
+    },
+        
+    infrared : function(rawValue) {
+      var value = rawValue < 800;
+
+      return value
     }
   }
   
@@ -99,6 +105,8 @@ angular.module('tideApp')
         })          
         board.analogRead(4, function(value) {
             board.pins[board.analogPins[4]].value = value;
+            sensorValues.infrared = valueConverter.infrared(value);
+
         }) 
         board.analogRead(5, function(value) {
             board.pins[board.analogPins[5]].value = value;
@@ -198,6 +206,7 @@ angular.module('tideApp')
     }
       
     device.buzzer = function(on) {
+        board.pinMode(6, board.MODES.OUTPUT);
         board.digitalWrite(6, on ? board.HIGH : board.LOW);
     }
     
@@ -222,6 +231,10 @@ angular.module('tideApp')
      
     device.humiditySensor = function() {
       return sensorValues.humidity;
+    }   
+      
+    device.infraredSensor = function() {
+      return sensorValues.infrared;
     }
     
     device.button = function() {

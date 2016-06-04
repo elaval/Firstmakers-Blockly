@@ -243,6 +243,31 @@ angular.module('tideApp')
     var code = 'fm_humiditySensor()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
+  
+  // -----------    
+  // Infrared sensor
+  // -----------
+  Blockly.Blocks['infrared_sensor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_INFRARED_SENSOR_TITLE, 'title');
+      this.setOutput(true, 'Boolean');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_INFRARED_SENSOR_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.infrared;
+      var stateMsg = value ? Blockly.Msg.FIRSTMAKERS_ON : Blockly.Msg.FIRSTMAKERS_OFF;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_INFRARED_SENSOR_TITLE +" (" + stateMsg +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['infrared_sensor'] = function(block) {
+    var code = 'fm_infraredSensor()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };
     
   // ------    
   // button
@@ -259,7 +284,7 @@ angular.module('tideApp')
     },
     updateSensor: function(sensorValues) {
       var value = sensorValues &&  sensorValues.button;
-      var stateMsg = value ? Blockly.Msg.FIRSTMAKERS_BUTTON_ON : Blockly.Msg.FIRSTMAKERS_BUTTON_OFF;
+      var stateMsg = value ? Blockly.Msg.FIRSTMAKERS_ON : Blockly.Msg.FIRSTMAKERS_OFF;
       this.setFieldValue(Blockly.Msg.FIRSTMAKERS_BUTTON_TITLE +" (" + stateMsg +")", 'title');
     }
   };
@@ -275,7 +300,8 @@ angular.module('tideApp')
   Blockly.Blocks['light_on'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TITLE);
+          .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_ON_TITLE)
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FIRSTMAKERS_WHITE, "13"], [Blockly.Msg.FIRSTMAKERS_RED, "7"], [Blockly.Msg.FIRSTMAKERS_YELLOW, "5"], [Blockly.Msg.FIRSTMAKERS_GREEN, "4"]]), "COLOR_PIN");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(Blockly.Blocks.firstmakers.HUE);
@@ -285,8 +311,8 @@ angular.module('tideApp')
   };
   
   Blockly.JavaScript['light_on'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = 'fm_light(true);\n';
+    var pin = block.getFieldValue('COLOR_PIN');
+    var code = 'fm_digitalWrite('+parseInt(pin)+', true);\n';
     return code;
   };
   
@@ -296,7 +322,8 @@ angular.module('tideApp')
   Blockly.Blocks['light_off'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE);
+          .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE)
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FIRSTMAKERS_WHITE, "13"], [Blockly.Msg.FIRSTMAKERS_RED, "7"], [Blockly.Msg.FIRSTMAKERS_YELLOW, "5"], [Blockly.Msg.FIRSTMAKERS_GREEN, "4"]]), "COLOR_PIN");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(Blockly.Blocks.firstmakers.HUE);
@@ -305,11 +332,13 @@ angular.module('tideApp')
     }
   };
   
+    
   Blockly.JavaScript['light_off'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = 'fm_light(false);\n';
+    var pin = block.getFieldValue('COLOR_PIN');
+    var code = 'fm_digitalWrite('+parseInt(pin)+', false);\n';
     return code;
   };
+
   
     Blockly.Blocks['buzzer_on'] = {
     init: function() {

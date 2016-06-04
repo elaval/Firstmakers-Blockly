@@ -28,6 +28,7 @@ angular.module('tideApp')
   myself.lightSensor = lightSensor;
   myself.audioSensor = audioSensor;
   myself.humiditySensor = humiditySensor;
+  myself.infraredSensor = infraredSensor;
   myself.button = button;
   myself.digitalWrite = digitalWrite;
   myself.digitalRead = digitalRead;
@@ -184,6 +185,16 @@ angular.module('tideApp')
   function humiditySensor() {
     if (physicalDevice) {
       return physicalDevice.humiditySensor()
+    } else if (virtualDevice) {
+      return 0;
+    } else {
+      deferred.reject("No board");
+    }
+  }
+    
+  function infraredSensor() {
+    if (physicalDevice) {
+      return physicalDevice.infraredSensor()
     } else if (virtualDevice) {
       return 0;
     } else {

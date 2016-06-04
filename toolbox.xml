@@ -37,11 +37,13 @@
     <block type="light_off"></block> 
     <block type="buzzer_on"></block>      
     <block type="buzzer_off"></block> 
+    
     <block type="potentiometer"></block> 
     <block type="temperature_sensor"></block> 
     <block type="light_sensor"></block> 
     <block type="audio_sensor"></block> 
     <block type="humidity_sensor"></block> 
+    <block type="infrared_sensor"></block> 
     
     <block type="button"></block> 
     <block type="digital_pin_on"></block>      

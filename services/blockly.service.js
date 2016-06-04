@@ -251,6 +251,15 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     
     interpreter.setProperty(scope, 'fm_humiditySensor',
         interpreter.createNativeFunction(wrapper)); 
+              
+    // infraredSensor()
+    wrapper = function() {  
+      var value = DeviceCommandService.infraredSensor();
+      return interpreter.createPrimitive(value);
+    };
+    
+    interpreter.setProperty(scope, 'fm_infraredSensor',
+        interpreter.createNativeFunction(wrapper)); 
            
 
         
