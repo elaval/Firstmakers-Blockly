@@ -12,6 +12,8 @@ Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE = "turn off light";
 Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TOOLTIP = "turn off white light (pin 13)";
 Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TITLE = "wait 1 sec.";
 Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TOOLTIP = "wait 1 second before next block";
+Blockly.Msg.FIRSTMAKERS_WAIT_TITLE = "wait %1 sec.";
+Blockly.Msg.FIRSTMAKERS_WAIT_TOOLTIP = "wait %1 sec.";
 Blockly.Msg.FIRSTMAKERS_SAY_HI_TITLE = "say hi";
 Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP = "say hi";
 Blockly.Msg.FIRSTMAKERS_SAY_TITLE = "say";
@@ -49,5 +51,7 @@ Blockly.Msg.FIRSTMAKERS_WHITE = "white";
 Blockly.Msg.FIRSTMAKERS_GREEN = "green";
 Blockly.Msg.FIRSTMAKERS_YELLOW = "yellow";
 Blockly.Msg.FIRSTMAKERS_RED = "red";
+Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE = "repeat";
+Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP = "repeat";
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "message";

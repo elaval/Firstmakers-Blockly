@@ -14,6 +14,7 @@
   
   <category name="CAT_CONTROL" colour="120">
     <block type="wait"></block> 
+    <block type="controls_repeat_forever"></block>
     <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">

@@ -12,6 +12,8 @@ Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TITLE = "apagar luz";
 Blockly.Msg.FIRSTMAKERS_LIGHT_OFF_TOOLTIP = "apagar luz blanca (pin 13)";
 Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TITLE = "esperar 1 seg.";
 Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TOOLTIP = "espera 1 segundo antes de continuar";
+Blockly.Msg.FIRSTMAKERS_WAIT_TITLE = "esperar %1 seg.";
+Blockly.Msg.FIRSTMAKERS_WAIT_TOOLTIP = "esperar %1 seg.";
 Blockly.Msg.FIRSTMAKERS_SAY_HI_TITLE = "decir hola";
 Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP = "decir hola";
 Blockly.Msg.FIRSTMAKERS_SAY_TITLE = "decir";
@@ -49,5 +51,7 @@ Blockly.Msg.FIRSTMAKERS_WHITE = "blanca";
 Blockly.Msg.FIRSTMAKERS_GREEN = "verde";
 Blockly.Msg.FIRSTMAKERS_YELLOW = "amarilla";
 Blockly.Msg.FIRSTMAKERS_RED = "roja";
+Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE = "repetir";
+Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP = "repetir";
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

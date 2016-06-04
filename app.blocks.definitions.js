@@ -50,11 +50,35 @@ angular.module('tideApp')
   
   /**
    * Definition of firstmakers blocks
-   * - say_hi (for testing purposes)
-   * - light_on : turns light on
-   * - light_off : turns light off
-   * - wait : waits 1 sec
    */
+  
+  Blockly.Blocks['controls_repeat_forever'] = {
+    /**
+     * Block for repeat indefintively.
+     */
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE);
+      this.appendStatementInput('DO')
+          .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.loops.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    }
+  };
+  
+  Blockly.JavaScript['controls_repeat_forever'] = function(block) {
+    var branch = Blockly.JavaScript.statementToCode(block, 'DO');
+    branch = Blockly.JavaScript.addLoopTrap(branch, block.id);
+    var code =  'while (true) {\n' + branch + '}\n';
+    return code;
+  };
+    
+  
+  
+  
   
   Blockly.Blocks['say_hi'] = {
     init: function() {
@@ -103,25 +127,37 @@ angular.module('tideApp')
     
     return code;
   };
-  
-  
-  
-  
+
   Blockly.Blocks['wait'] = {
+    /**
+     * Block for string length.
+     * @this Blockly.Block
+     */
     init: function() {
-      this.appendDummyInput()
-          .appendField(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TITLE);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(Blockly.Blocks.loops.HUE);
-      this.setTooltip(Blockly.Msg.FIRSTMAKERS_WAIT_1_SEC_TOOLTIP);
-      this.setHelpUrl('http://www.firstmakers.com/');
+      this.jsonInit({
+        "message0": Blockly.Msg.FIRSTMAKERS_WAIT_TITLE,
+        "args0": [
+          {
+            "type": "field_input",
+            "name": "VALUE",
+            "text": 1,
+            "check": ['Number']
+          }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": Blockly.Blocks.loops.HUE,
+        "tooltip": Blockly.Msg.FIRSTMAKERS_WAIT_TOOLTIP,
+        "helpUrl": Blockly.Msg.TEXT_LENGTH_HELPURL
+      });
+      this.getField('VALUE').setValidator(
+          Blockly.FieldTextInput.nonnegativeIntegerValidator);
     }
-  };
+  };  
   
   Blockly.JavaScript['wait'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = 'fm_wait(1000);\n';
+    var value = block.getFieldValue('VALUE');
+    var code = 'fm_wait('+value*1000+');\n';
     return code;
   };
   
