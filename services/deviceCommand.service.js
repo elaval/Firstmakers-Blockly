@@ -25,6 +25,7 @@ angular.module('tideApp')
   myself.buzzer = buzzer;
   myself.potentiometer = potentiometer;
   myself.temperature = temperature;
+  myself.lightSensor = lightSensor;
   myself.button = button;
   myself.digitalWrite = digitalWrite;
   myself.digitalRead = digitalRead;
@@ -151,6 +152,16 @@ angular.module('tideApp')
   function temperature() {
     if (physicalDevice) {
       return physicalDevice.temperature()
+    } else if (virtualDevice) {
+      return 0;
+    } else {
+      deferred.reject("No board");
+    }
+  }  
+  
+  function lightSensor() {
+    if (physicalDevice) {
+      return physicalDevice.lightSensor()
     } else if (virtualDevice) {
       return 0;
     } else {

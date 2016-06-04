@@ -101,12 +101,7 @@ angular.module('tideApp')
      */
     function updateBlocks() {
         if (physicalDevice) {
-            if (myself.physicalBoard) {
-                
 
-                
-            }
-            
             var blocks = myself.workspace.getAllBlocks();
             for (var i = 0, block; block = blocks[i]; i++) {
                 block.updateSensor && block.updateSensor(physicalDevice.sensorValues());

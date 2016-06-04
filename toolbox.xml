@@ -39,6 +39,8 @@
     <block type="buzzer_off"></block> 
     <block type="potentiometer"></block> 
     <block type="temperature"></block> 
+    <block type="ligth_sensor"></block> 
+    
     <block type="button"></block> 
       <block type="digital_pin_on"></block>      
       <block type="digital_pin_off"></block> 

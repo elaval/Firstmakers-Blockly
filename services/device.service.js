@@ -35,6 +35,12 @@ angular.module('tideApp')
       // return rouded to 1 decimal
       return Math.round(10*celsius)/10;
       
+    },
+    
+    light : function(rawValue) {
+      var value = Math.floor(100*rawValue/1023);
+
+      return value
     }
   }
   
@@ -68,6 +74,7 @@ angular.module('tideApp')
         })   
         board.analogRead(1, function(value) {
             board.pins[board.analogPins[1]].value = value;
+            sensorValues.light = valueConverter.light(value);
         })          
         board.analogRead(2, function(value) {
             board.pins[board.analogPins[2]].value = value;
@@ -188,6 +195,11 @@ angular.module('tideApp')
     
     device.temperature = function() {
       return sensorValues.temperature;
+    }
+    
+        
+    device.lightSensor = function() {
+      return sensorValues.light;
     }
     
     device.button = function() {

@@ -216,7 +216,16 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_potentiometer',
         interpreter.createAsyncFunction(wrapper));
     
-    // temperature() block.
+    // temperature()
+    wrapper = function() {  
+      var value = DeviceCommandService.lightSensor();
+      return interpreter.createPrimitive(value);
+    };
+    
+    interpreter.setProperty(scope, 'fm_lightSensor',
+        interpreter.createNativeFunction(wrapper)); 
+           
+    // light_sensor()
     wrapper = function() {  
       var value = DeviceCommandService.temperature();
       return interpreter.createPrimitive(value);

@@ -170,6 +170,30 @@ angular.module('tideApp')
     var code = 'fm_temperature()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
+  
+  // -----------    
+  // Light
+  // -----------
+  Blockly.Blocks['ligth_sensor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TITLE, 'title');
+      this.setOutput(true, 'Number');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.light;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TITLE +" (" + value +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['ligth_sensor'] = function(block) {
+    var code = 'fm_lightSensor()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };
     
   // ------    
   // button

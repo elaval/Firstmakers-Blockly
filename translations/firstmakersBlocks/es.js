@@ -37,6 +37,7 @@ Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TITLE  = 'leer pin digital';
 Blockly.Msg.FIRSTMAKERS_READ_DIGITAL_PIN_TOOLTIP  = 'leer pin digital';
 Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TITLE  = 'leer pin analógico';
 Blockly.Msg.FIRSTMAKERS_READ_ANALOG_PIN_TOOLTIP  = 'leer pin analógico';
-
+Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TITLE = 'sensor de luz';
+Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TOOLTIP = 'sensor de luz';
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";
