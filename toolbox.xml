@@ -14,7 +14,13 @@
   
   <category name="CAT_CONTROL" colour="120">
     <block type="wait"></block> 
-    <block type="controls_repeat_ext"></block>
+    <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">3</field>
+          </block>
+        </value>
+    </block>
     <block type="controls_whileUntil"></block>
   </category>
   <category name="CAT_LOGIC" colour="185">
