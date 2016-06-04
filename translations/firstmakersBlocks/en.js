@@ -45,5 +45,9 @@ Blockly.Msg.FIRSTMAKERS_INFRARED_SENSOR_TITLE = 'infrared sensor'
 Blockly.Msg.FIRSTMAKERS_INFRARED_SENSOR_TOOLTIP = 'infrared sensor'
 Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TITLE = "slider";
 Blockly.Msg.FIRSTMAKERS_POTENTIOMETER_TOOLTIP = "get slider value (pin A5)";
+Blockly.Msg.FIRSTMAKERS_WHITE = "white";
+Blockly.Msg.FIRSTMAKERS_GREEN = "green";
+Blockly.Msg.FIRSTMAKERS_YELLOW = "yellow";
+Blockly.Msg.FIRSTMAKERS_RED = "red";
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "message";
