@@ -1,6 +1,7 @@
 {
   "BLOCKLY_VERSION" : "(Blockly version)",
   "CODE_RUN" : "Run the code",
+  "CODE_STOP" : "Stop the código",
   "VIRTUAL_BOARD" : "Virtual board",
   "VIRTUAL_BOARD_MSG" : "Your program will work with the following virtual board for limited testing.",
   "VIRTUAL_BOARD_MSG_2" : "But the experience is much better with a real board.",
@@ -25,7 +26,8 @@
   "CAT_COLOR" : "Color",
   "CAT_LISTS" : "Lists",
   "CAT_INTERNET" : "Internet",
-
+  "CAT_ARDUINO" : "Arduino",
+  "MSG_HELLO": "Hello!",
   
   "__DUMMY__" : "no trailing comma"
 }

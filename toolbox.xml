@@ -58,8 +58,13 @@
     <block type="read_analog_pin"></block>     
   </category>
   <category name="CAT_TEXT"  colour="160" >
-     <block type="say"></block>  
-     <block type="say_hi"></block>  
+     <block type="say">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT">MSG_HELLO</field>
+          </block>
+        </value>
+     </block>  
      <block type="text"></block>  
      <block type="text_prompt"></block>     
   </category>

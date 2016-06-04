@@ -73,14 +73,15 @@ angular.module('tideApp')
     return code;
   };
   
-  
   Blockly.Blocks['say'] = {
     init: function() {
       this.appendDummyInput()
           .appendField(Blockly.Msg.FIRSTMAKERS_SAY_TITLE);
       this.appendValueInput("CONTENT")
           .setCheck(null)
-          .appendField(Blockly.Msg.FIRSTMAKERS_MESSAGE);
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
       this.setColour(Blockly.Blocks.texts.HUE);
       this.setTooltip(Blockly.Msg.FIRSTMAKERS_SAY_HI_TOOLTIP);
       this.setHelpUrl('http://www.example.com/');

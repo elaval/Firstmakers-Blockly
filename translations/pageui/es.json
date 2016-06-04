@@ -1,6 +1,7 @@
 {
   "BLOCKLY_VERSION" : "(Version Blockly)",
   "CODE_RUN" : "Ejecutar el código",
+  "CODE_STOP" : "Detener el código",
   "VIRTUAL_BOARD" : "Tarjeta virtual",
   "VIRTUAL_BOARD_MSG" : "Tu programa funcionará con la siguiente tarjeta virtual para hacer pruebas limitadas",
   "VIRTUAL_BOARD_MSG_2" : "Pero la experienca es mejor con una tarjeta real.",
@@ -26,6 +27,7 @@
   "CAT_LISTS" : "Listas",
   "CAT_INTERNET" : "Internet",
   "CAT_ARDUINO" : "Arduino",
+  "MSG_HELLO": "¡Hola!",
 
   
   "__DUMMY__" : "no trailing comma"

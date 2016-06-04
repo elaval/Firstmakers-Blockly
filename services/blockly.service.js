@@ -22,6 +22,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
   // Public functions
   myself.getOptions = getOptions;
   myself.runCode = runCode; 
+  myself.stopCode = stopCode; 
   myself.setCodeXML = setCodeXML;
 
   // Local variables
@@ -30,6 +31,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
   var highlightPause = false;
   var physicalDevice = null;
   var virtualDevice = null;
+  var paused = false;
   
   // Implementation of public functions (this.myfunction ...)
   // =========================================================
@@ -40,6 +42,8 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
    */
   function runCode(_workspace) {
     workspace = _workspace;
+    
+    stop = false;
     
     // Configutarion of block higlighting functionality
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -61,28 +65,45 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     workspace.traceOn(true);
     workspace.highlightBlock(null);
     
-    // Executes each step of the code until there is now steps left
-    function stepCode() {
-      try {
-        var ok = myInterpreter.step();
-      } finally {
-        if (!ok) {
-          // Program complete, no more code to execute.
-          //document.getElementById('stepButton').disabled = 'disabled';
-          workspace.highlightBlock(null);
-          return;
-        }
-      }
-      
-      // No wait between each step (this can be increased for educational/monitoring purposes)
-      $timeout(0).then(stepCode);
-
-    }
-
     // Start running the code!!
     stepCode();
 
   }
+  
+   /**
+   * Pauses the currently running code
+   */
+  function stopCode() {
+    stop = true;
+  }
+
+  
+  
+  // Executes each step of the code until there is now steps left
+  function stepCode() {
+    try {
+      if (!stop) {
+        var ok = myInterpreter.step();
+      } else {
+        var ok = false;
+        stop = false;
+      }
+    } finally {
+      if (!ok) {
+        // Program complete or stopped, no more code to execute.
+        //document.getElementById('stepButton').disabled = 'disabled';
+        workspace.highlightBlock(null);
+        $rootScope.$broadcast("blockly.codeCompleted");
+        
+        return;
+      }
+    }
+    
+    // No wait between each step (this can be increased for educational/monitoring purposes)
+    $timeout(0).then(stepCode);
+
+  }
+
 
   
   function getOptions(toolboxPath) {
