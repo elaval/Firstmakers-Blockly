@@ -38,14 +38,16 @@
     <block type="buzzer_on"></block>      
     <block type="buzzer_off"></block> 
     <block type="potentiometer"></block> 
-    <block type="temperature"></block> 
-    <block type="ligth_sensor"></block> 
+    <block type="temperature_sensor"></block> 
+    <block type="light_sensor"></block> 
+    <block type="audio_sensor"></block> 
+    <block type="humidity_sensor"></block> 
     
     <block type="button"></block> 
-      <block type="digital_pin_on"></block>      
-      <block type="digital_pin_off"></block> 
-      <block type="read_digital_pin"></block>     
-      <block type="read_analog_pin"></block>     
+    <block type="digital_pin_on"></block>      
+    <block type="digital_pin_off"></block> 
+    <block type="read_digital_pin"></block>     
+    <block type="read_analog_pin"></block>     
   </category>
   <category name="CAT_TEXT"  colour="160" >
      <block type="say"></block>  

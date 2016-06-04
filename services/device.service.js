@@ -41,6 +41,18 @@ angular.module('tideApp')
       var value = Math.floor(100*rawValue/1023);
 
       return value
+    }, 
+        
+    audio : function(rawValue) {
+      var value = Math.floor(100*rawValue/1023);
+
+      return value
+    }, 
+    
+    humidity : function(rawValue) {
+      var value = Math.floor(100*rawValue/1023);
+
+      return value
     }
   }
   
@@ -78,9 +90,12 @@ angular.module('tideApp')
         })          
         board.analogRead(2, function(value) {
             board.pins[board.analogPins[2]].value = value;
+            sensorValues.audio = valueConverter.audio(value);
+
         })          
         board.analogRead(3, function(value) {
             board.pins[board.analogPins[3]].value = value;
+            sensorValues.humidity = valueConverter.humidity(value);
         })          
         board.analogRead(4, function(value) {
             board.pins[board.analogPins[4]].value = value;
@@ -193,13 +208,20 @@ angular.module('tideApp')
       return deferred.promise;
     }
     
-    device.temperature = function() {
+    device.temperatureSensor = function() {
       return sensorValues.temperature;
     }
-    
-        
+       
     device.lightSensor = function() {
       return sensorValues.light;
+    }  
+           
+    device.audioSensor = function() {
+      return sensorValues.audio;
+    }      
+     
+    device.humiditySensor = function() {
+      return sensorValues.humidity;
     }
     
     device.button = function() {

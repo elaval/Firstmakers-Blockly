@@ -216,23 +216,43 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_potentiometer',
         interpreter.createAsyncFunction(wrapper));
     
-    // temperature()
+    // temperatureSensor()
+    wrapper = function() {  
+      var value = DeviceCommandService.temperatureSensor();
+      return interpreter.createPrimitive(value);
+    };
+    
+    interpreter.setProperty(scope, 'fm_temperatureSensor',
+        interpreter.createNativeFunction(wrapper));
+        
+    // lightSensor()
     wrapper = function() {  
       var value = DeviceCommandService.lightSensor();
       return interpreter.createPrimitive(value);
     };
     
     interpreter.setProperty(scope, 'fm_lightSensor',
-        interpreter.createNativeFunction(wrapper)); 
-           
-    // light_sensor()
+        interpreter.createNativeFunction(wrapper));         
+    
+    // audioSensor()
     wrapper = function() {  
-      var value = DeviceCommandService.temperature();
+      var value = DeviceCommandService.audioSensor();
       return interpreter.createPrimitive(value);
     };
     
-    interpreter.setProperty(scope, 'fm_temperature',
-        interpreter.createNativeFunction(wrapper));
+    interpreter.setProperty(scope, 'fm_audioSensor',
+        interpreter.createNativeFunction(wrapper)); 
+           
+   // humiditySensor()
+    wrapper = function() {  
+      var value = DeviceCommandService.humiditySensor();
+      return interpreter.createPrimitive(value);
+    };
+    
+    interpreter.setProperty(scope, 'fm_humiditySensor',
+        interpreter.createNativeFunction(wrapper)); 
+           
+
         
     // fm_button()
     wrapper = function(callback) {  

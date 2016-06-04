@@ -150,31 +150,31 @@ angular.module('tideApp')
   // -----------    
   // Temperature
   // -----------
-  Blockly.Blocks['temperature'] = {
+  Blockly.Blocks['temperature_sensor'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TITLE, 'title');
+          .appendField(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_SENSOR_TITLE, 'title');
       this.setOutput(true, 'Number');      
       this.setColour(Blockly.Blocks.firstmakers.HUE);
-      this.setTooltip(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TOOLTIP);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_SENSOR_TOOLTIP);
       this.setHelpUrl('http://www.firstmakers.com/');
       
     },
     updateSensor: function(sensorValues) {
       var value = sensorValues &&  sensorValues.temperature;
-      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_TITLE +" (" + value +")", 'title');
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_TEMPERATURE_SENSOR_TITLE +" (" + value +")", 'title');
     }
   };
   
-  Blockly.JavaScript['temperature'] = function(block) {
-    var code = 'fm_temperature()';
+  Blockly.JavaScript['temperature_sensor'] = function(block) {
+    var code = 'fm_temperatureSensor()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
   
   // -----------    
-  // Light
+  // Light sensor
   // -----------
-  Blockly.Blocks['ligth_sensor'] = {
+  Blockly.Blocks['light_sensor'] = {
     init: function() {
       this.appendDummyInput()
           .appendField(Blockly.Msg.FIRSTMAKERS_LIGHT_SENSOR_TITLE, 'title');
@@ -190,8 +190,57 @@ angular.module('tideApp')
     }
   };
   
-  Blockly.JavaScript['ligth_sensor'] = function(block) {
+  Blockly.JavaScript['light_sensor'] = function(block) {
     var code = 'fm_lightSensor()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };
+    
+    
+  // -----------    
+  // Audio sensor
+  // -----------
+  Blockly.Blocks['audio_sensor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_AUDIO_SENSOR_TITLE, 'title');
+      this.setOutput(true, 'Number');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_AUDIO_SENSOR_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.audio;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_AUDIO_SENSOR_TITLE +" (" + value +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['audio_sensor'] = function(block) {
+    var code = 'fm_audioSensor()';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  };    
+  
+  // -----------    
+  // Humidity sensor
+  // -----------
+  Blockly.Blocks['humidity_sensor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_HUMIDITY_SENSOR_TITLE, 'title');
+      this.setOutput(true, 'Number');      
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_HUMIDITY_SENSOR_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+      
+    },
+    updateSensor: function(sensorValues) {
+      var value = sensorValues &&  sensorValues.humidity;
+      this.setFieldValue(Blockly.Msg.FIRSTMAKERS_HUMIDITY_SENSOR_TITLE +" (" + value +")", 'title');
+    }
+  };
+  
+  Blockly.JavaScript['humidity_sensor'] = function(block) {
+    var code = 'fm_humiditySensor()';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
     
