@@ -18,7 +18,7 @@ angular.module("tideApp")
       link: function(scope, element) {
 
         element.bind('click', function(e) {
-            angular.element(e.target).siblings('#upload').trigger('click');
+            angular.element(e.currentTarget).siblings('#upload').trigger('click');
         });
       }
     };

@@ -52,18 +52,25 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <div id="upload" file-input="controller.file" on-change="controller.openFile()" style="display: none;"></div>
-          <a uploadfile>Open <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
+          <a href="#" uploadfile><span translate>BUTTON_OPEN</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
         </li>
-        <li><a ng-click="controller.saveAsFile()">Save <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
-        <li class="dropdown">
+        <li><a ng-click="controller.saveAsFile()" href="#"><span translate>BUTTON_SAVE</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
+        <li><a ng-click="controller.clearBlocks()" href="#"><span translate>BUTTON_CLEAR_BLOCKS</span> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>        
+        <li ng-class="{'active': controller.selectedLanguage == 'es'}"><a ng-click="controller.changeLanguage('es')" href="#" translate="BUTTON_LANG_ES"></a></li>        
+        <li ng-class="{'active': controller.selectedLanguage == 'en'}"><a ng-click="controller.changeLanguage('en')" href="#" translate="BUTTON_LANG_EN"></a></li>        
+        
+        <!--
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Español</a></li>
             <li><a href="#">English</a></li>
           </ul>
         </li>
+        -->
       </ul>
     </div><!-- /.navbar-collapse -->
+
 
 
 
@@ -108,10 +115,7 @@
      <div class="footer">
        <p>Firstmakers</p>
     </div>
-    <button ng-click="controller.softReset()" type="button" class="btn btn-default" translate>SOFT_RESET</button>
-    <button ng-click="controller.clearBlocks()"  class="btn btn-default" translate>BUTTON_CLEAR_BLOCKS</button>
-    <button ng-click="controller.changeLanguage('es')"  class="btn btn-default" ng-class="{'btn-primary': controller.selectedLanguage == 'es'}" translate="BUTTON_LANG_ES"></button>
-    <button ng-click="controller.changeLanguage('en')"  class="btn btn-default" ng-class="{'btn-primary': controller.selectedLanguage == 'en'}" translate="BUTTON_LANG_EN"></button>
+    <button ng-click="controller.softReset()" type="button" class="btn btn-default" ><span translate>SOFT_RESET</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
 
 
   </div><!-- container -->

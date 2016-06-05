@@ -40,7 +40,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
    * Runs code for a blockly workspace and ejecutes instructions in virtual and physica device (if available)
    * Code is run step by step by an interpreter and each block is higlighted
    */
-  function runCode(_workspace) {
+  function runCode(_workspace, blockId) {
     workspace = _workspace;
     
     stop = false;
@@ -54,8 +54,15 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     Blockly.JavaScript.INFINITE_LOOP_TRAP =
         'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
     
-    // Gets javascript version of the code    
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    // Gets javascript version of the code   
+    if (blockId) {
+      // Getting code for a specific block
+      var block = workspace.getBlockById(blockId);
+      var code = Blockly.JavaScript.blockToCode(block); 
+    } else {
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+    }
+    
     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     
     // Create the interpreter for our JS code
@@ -69,6 +76,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     stepCode();
 
   }
+  
   
    /**
    * Pauses the currently running code

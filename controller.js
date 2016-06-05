@@ -68,6 +68,7 @@ angular.module('tideApp')
     var physicalDevice = null;
     var virtualDevice = null;
     var pinState = {};
+    var recentClick = false;
    
     // Init controller
     activate()
@@ -96,7 +97,7 @@ angular.module('tideApp')
     
     $interval(function() {
         updateBlocks();
-    }, 1000);
+    }, 100);
     
     
     /**
@@ -286,7 +287,20 @@ angular.module('tideApp')
      * Called each time the workspace changes assignec to change listener in onInjected
      */
     function onWorkspaceChange(e) {
-        $log.debug(e);
+        if (e.element=="click") {
+            if (recentClick) {
+                //This is a double click;
+                BlocklyService.runCode(myself.workspace, e.blockId)
+            }
+            
+            // Remember this click for 300 ms
+            recentClick = true;
+            $timeout(300)
+            .then(function() {
+                recentClick = false;
+            })
+        }
+        
         saveBlocks();
     }
     

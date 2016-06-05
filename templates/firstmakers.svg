@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg class="firstmakers">
+    <g transform="translate(5,5)">
+        <image href="./images/firstmakers_board.png" class="board" width="80" height="160"></image>
+        <circle class="light white" r="3" cx="53" cy="45" fill="grey" stroke="black" stroke-width="1"></circle>
+        <circle class="light red" r="3" cx="53" cy="55" fill="grey" stroke="black" stroke-width="1"></circle>
+        <circle class="light yellow" r="3" cx="53" cy="65" fill="grey" stroke="black" stroke-width="1"></circle>
+        <circle class="light green" r="3" cx="53" cy="75" fill="grey" stroke="black" stroke-width="1"></circle>
+        <rect class="potentiometer lever"  x="40" y="113" width="5" height="15" stroke="black" stroke-width="1" fill="lightblue"></rect>  
+
+    </g>
+    
+</svg>

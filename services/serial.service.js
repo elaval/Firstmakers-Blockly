@@ -10,7 +10,7 @@
  *
  */
 angular.module('tideApp')
-.service('SerialService',[ '$rootScope','$q', 'd3', '_', '$http',function( $rootScope, $q, d3,_, $http) {
+.service('SerialService',[ '$rootScope','$q', 'd3', '_', '$http','$timeout', function( $rootScope, $q, d3,_, $http, $timeout) {
   var myself = this;
 
   var rport = /usb|acm|^com/i;
@@ -69,7 +69,9 @@ var Serial = {
       if (!ports.length) {
 
         // Retry Serial connection
-        Serial.detect.call(this, callback);
+        $timeout(100, function() {
+            Serial.detect.call(this, callback);
+        })
         return;
       }
 

@@ -15,6 +15,8 @@
   "BUTTON_LANG_ES" : "Español",
   "BUTTON_LANG_EN" : "English",
   "BUTTON_CLEAR_BLOCKS" :"Borrar bloques",
+  "BUTTON_OPEN" :"Abrir",
+  "BUTTON_SAVE" :"Guardar como",
   "CONFIRM_CLEAR_MSG" : "¿Seguro que desea eliminar todos los bloques?",
   "CAT_CONTROL" : "Control",
   "CAT_LOGIC" : "Lógica",
