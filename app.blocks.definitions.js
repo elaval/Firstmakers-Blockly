@@ -78,8 +78,6 @@ angular.module('tideApp')
     
   
   
-  
-  
   Blockly.Blocks['say_hi'] = {
     init: function() {
       this.appendDummyInput()
