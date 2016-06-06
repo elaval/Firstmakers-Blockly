@@ -53,5 +53,7 @@ Blockly.Msg.FIRSTMAKERS_YELLOW = "amarilla";
 Blockly.Msg.FIRSTMAKERS_RED = "roja";
 Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE = "repetir";
 Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP = "repetir";
+Blockly.Msg.FIRSTMAKERS_ON_KEY_TITLE = "presionar tecla";
+Blockly.Msg.FIRSTMAKERS_ON_KEY_TOOLTIP = "presionar tecla";
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

@@ -45,6 +45,7 @@ angular.module('tideApp')
   
   Blockly.Blocks.firstmakers.HUE = 210
   Blockly.Blocks.internet.HUE = 100
+  Blockly.BlockSvg.START_HAT = true;
 
 
   
@@ -76,7 +77,29 @@ angular.module('tideApp')
     return code;
   };
     
+  Blockly.Blocks['on_key'] = {
+    /**
+     * Block for repeat indefintively.
+     */
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.FIRSTMAKERS_ON_KEY_TITLE)
+          .appendField(new Blockly.FieldTextInput("p"), "KEY");
+      this.appendStatementInput('DO')
+          .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.loops.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_ON_KEY_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    }
+  };
   
+  Blockly.JavaScript['on_key'] = function(block) {
+    var branch = Blockly.JavaScript.statementToCode(block, 'DO');
+    branch = Blockly.JavaScript.addLoopTrap(branch, block.id);
+    var code =  branch;
+    return code;
+  };
   
   Blockly.Blocks['say_hi'] = {
     init: function() {

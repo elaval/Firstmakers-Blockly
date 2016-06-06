@@ -26,6 +26,7 @@ angular.module("tideApp")
         
         function render(options) {
           if (options) {
+            options.sounds=false;
             // Remove exiting blockly elements
             element.children().children().remove();
             
