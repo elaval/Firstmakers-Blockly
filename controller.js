@@ -277,7 +277,9 @@ angular.module('tideApp')
     function clearBlocks() {
         $translate('CONFIRM_CLEAR_MSG').then(function (messageTxt) {
             if (myself.workspace && confirm(messageTxt)) {
-            myself.workspace.clear();
+                myself.workspace.clear();
+                $window.localStorage.removeItem('savedBlocks');
+
             }
         });
 
