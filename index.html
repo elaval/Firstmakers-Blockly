@@ -19,7 +19,7 @@
 
  
 </head>
-<body ng-app="tideApp" ng-controller="AppController as controller" ng-keydown="controller.onKeyDown($event)" ng-keyup="controller.onKeyUp($event)">
+<body ng-app="tideApp" ng-controller="AppController as controller" class="ng-cloak" ng-keydown="controller.onKeyDown($event)" ng-keyup="controller.onKeyUp($event)">
   <!--[if lt IE 7]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -87,7 +87,7 @@
 
   <!-- Add your site or application content here -->
   <!-- container -->
-  <div class="container" > 
+  <div class="container" ng-cloak > 
     <div class="row">
       
       <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
