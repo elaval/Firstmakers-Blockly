@@ -553,7 +553,202 @@ angular.module('tideApp')
     var code = 'fm_analogRead('+pin+')';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];;
   };
+
+  // -----------
+  // servo
+  // -----------
+  Blockly.Blocks['servo'] = {
+    init: function() {
+      this.jsonInit({
+        "message0": Blockly.Msg.FIRSTMAKERS_SET_SERVO_TITLE,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "PIN",
+            "options": [["3", "3"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"]]
+          },
+          {
+            "type": "input_value",
+            "name": "ANGLE",
+            "check": "Number"
+          }
+        ],
+      });
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_SET_SERVO_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    }
+  };
  
+  Blockly.JavaScript['servo'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    if (block.getField('ANGLE')) {
+      // Internal number.
+      var angle = String(Number(block.getFieldValue('ANGLE')));
+    } else {
+      // External number.
+      var angle = Blockly.JavaScript.valueToCode(block, 'ANGLE',
+          Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+    }
+    var code = 'fm_servo('+pin+','+angle+');\n';
+    return code;
+  };
+
+
+
+
+  //-----------
+  // CONFIGURATION MOTOR 
+  //-----------
+  Blockly.Blocks['motor_config'] = {
+    init: function() {
+      this.jsonInit({
+        "type": "motor_config",
+        "message0": Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TITLE,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "MOTOR_ID",
+            "options": [["A","A"],["B","B"]]
+          },
+          {
+            "type": "input_dummy"
+          },
+          {
+            "type": "field_dropdown",
+            "name": "POWER_PIN_A",
+            "options": [["3","3"],["9","9"],["10","10"],["11","11"]]
+          },
+          {
+            "type": "input_dummy"
+          },
+          {
+            "type": "field_dropdown",
+            "name": "DIR_PIN_A",
+            "options": [["3","3"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"]]
+          }
+        ],
+      });
+      this.getField("DIR_PIN_A").setValue("8");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TOOLTIP);
+      this.setHelpUrl('http://www.example.com/');
+    }
+  };
+
+  Blockly.JavaScript['motor_config'] = function(block) {
+    var motorId = block.getFieldValue('MOTOR_ID');
+    var powerPin = block.getFieldValue('POWER_PIN_A');
+    var dirPin = block.getFieldValue('DIR_PIN_A');
+    var code = 'fm_motor_config("'+motorId+'",'+powerPin+','+dirPin+');\n';
+    return code;
+  };
+
+
+  //-----------
+  // MOTOR DC SPEED
+  //-----------
+  Blockly.Blocks['motor_speed'] = {
+    init: function() {
+      this.jsonInit({
+        "message0":Blockly.Msg.FIRSTMAKERS_MOTOR_SPEED_TITLE,
+        //"message0": "MOTOR_SPEED  %1 TO %2",
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "MOTOR_ID",
+            "options": [["A","A"],["B","B"]]
+
+          },
+          {
+            "type": "input_value",
+            "name": "SPEED",
+            "check": "Number"
+          }
+        ],
+      });
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_MOTOR_SPEED_TOOLTIP);
+      this.setHelpUrl('http://www.example.com/');
+    }
+  };
+
+  Blockly.JavaScript['motor_speed'] = function(block) {
+    var motorId = block.getFieldValue('MOTOR_ID');
+    if (block.getField('ANGLE')) {
+      // Internal number.
+      var speed = String(Number(block.getFieldValue('SPEED')));
+    } else {
+      // External number.
+      var speed = Blockly.JavaScript.valueToCode(block, 'SPEED',
+          Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+    }    
+    var code = 'fm_motor_speed("'+motorId+'",'+speed+');\n';
+    return code;
+  };
+
+
+
+  //-----------
+  // MOTOR DC DIRECTION
+  //-----------
+  Blockly.Blocks['motor_direction'] = {
+    init: function() {
+      this.jsonInit({
+        
+        //"message0": "MOTOR_CLOCKWISE  %1 TO %2",
+        "message0": Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TITLE,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "MOTOR_ID",
+            "options": [["A","A"],["B","B"]]
+          },
+          {
+            "type": "field_dropdown",
+            "name": "DIRECTION",
+            "options": [
+              [
+                Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_FORWARD,
+                "0"
+              ],
+              [
+                Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_BACKWARD,
+                "1"
+              ]
+            ]
+          },
+        ],
+      });
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TOOLTIP);
+      this.setHelpUrl('http://www.example.com/');
+    }
+  };
+
+
+  Blockly.JavaScript['motor_direction'] = function(block) {
+    var motorId = block.getFieldValue('MOTOR_ID');
+    var direction = block.getFieldValue('DIRECTION');
+    var code = 'fm_motor_direction("'+motorId+'",'+direction+');\n';
+    return code;
+  };
+
+
+
+
+
  Blockly.Blocks['getXhr'] = {
     init: function() {
       this.appendDummyInput()

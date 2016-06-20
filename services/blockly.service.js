@@ -354,6 +354,47 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     interpreter.setProperty(scope, 'fm_buzzer',
         interpreter.createNativeFunction(wrapper));
 
+    // servo(pin,angle)
+    wrapper = function(pin, angle) {
+      pin = pin ? pin.toNumber() : 12;
+      angle = angle ? angle.toNumber() : 0;
+      return interpreter.createPrimitive(DeviceCommandService.servo(pin,angle));
+    };
+    interpreter.setProperty(scope, 'fm_servo',
+        interpreter.createNativeFunction(wrapper));
+
+    // motorConfig(id,powerPin,dirPin)
+    wrapper = function(id, powerPin, dirPin) {
+      id = id ? id.toString() : "A";
+      powerPin = powerPin ? powerPin.toNumber() : 3;
+      dirPin = dirPin ? dirPin.toNumber() : 8;
+      return interpreter.createPrimitive(DeviceCommandService.motorConfig(id,powerPin,dirPin));
+    };
+    interpreter.setProperty(scope, 'fm_motor_config',
+        interpreter.createNativeFunction(wrapper));
+
+
+    // motorSpeed(id,speed)
+    wrapper = function(id, speed) {
+      id = id ? id.toString() : "A";
+      speed = speed ? speed.toNumber() : 0;
+      return interpreter.createPrimitive(DeviceCommandService.motorSpeed(id,speed));
+    };
+    interpreter.setProperty(scope, 'fm_motor_speed',
+        interpreter.createNativeFunction(wrapper));
+
+    // motorDirection(id,direction)
+    wrapper = function(id, dir) {
+      id = id ? id.toString() : "A";
+      dir = dir ? dir.toNumber() : 0;
+      return interpreter.createPrimitive(DeviceCommandService.motorDirection(id,dir));
+    };
+    interpreter.setProperty(scope, 'fm_motor_direction',
+        interpreter.createNativeFunction(wrapper));
+
+
+
+
     // say(text)
     wrapper = function(text) {
       text = text ? text.toString() : '';

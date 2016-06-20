@@ -33,6 +33,12 @@ angular.module('tideApp')
   myself.digitalWrite = digitalWrite;
   myself.digitalRead = digitalRead;
   myself.analogRead = analogRead;
+  myself.servo = servo;
+  myself.motorConfig = motorConfig;
+  myself.motorSpeed = motorSpeed;
+  myself.motorDirection = motorDirection;
+
+
   
   // Local variables
   var physicalDevice = null;
@@ -242,6 +248,54 @@ angular.module('tideApp')
     }
   
     return deferred.promise;
+  }
+
+  // servo
+  function servo(pin,angle) {
+    if (virtualDevice) {
+      virtualDevice.servoWrite(pin,angle);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.servoWrite(pin,angle);
+    }
+    
+  }
+
+  // motorConfig
+  function motorConfig(id,powerPin,dirPin) {
+    if (virtualDevice) {
+      virtualDevice.motorConfig(id,powerPin,dirPin);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.motorConfig(id,powerPin,dirPin);
+    }
+    
+  }
+  
+  // motorSpeed
+  function motorSpeed(id,speed) {
+    if (virtualDevice) {
+      virtualDevice.motorSpeed(id,speed);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.motorSpeed(id,speed);
+    }
+    
+  }
+
+  // motorDirection
+  function motorDirection(id,dir) {
+    if (virtualDevice) {
+      virtualDevice.motorDirection(id,dir);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.motorDirection(id,dir);
+    }
+    
   }
 
 }])

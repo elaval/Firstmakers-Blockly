@@ -55,5 +55,16 @@ Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE = "repetir";
 Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP = "repetir";
 Blockly.Msg.FIRSTMAKERS_ON_KEY_TITLE = "al presionar tecla";
 Blockly.Msg.FIRSTMAKERS_ON_KEY_TOOLTIP = "al presionar tecla";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TITLE = "servo en pin %1 a %2 grados";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TOOLTIP = "configuración de motor servo";
+Blockly.Msg.FIRSTMAKERS_MOTOR_SPEED_TITLE = "velocidad de motor %1 en %2";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TOOLTIP = "configurar velocidad de motor";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TITLE = "dirección de motor %1 hacia %2";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_FORWARD = "adelante";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_BACKWARD = "atrás";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TOOLTIP = "configurar dirección de motor";
+Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TITLE = "configurar motor DC %1 %2pin %3 para velocidad%4 pin %5 para dirección";
+Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TOOLTIP = "configurar pines de motor dc";
+
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

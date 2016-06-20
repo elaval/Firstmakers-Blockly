@@ -55,5 +55,15 @@ Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TITLE = "repeat";
 Blockly.Msg.FIRSTMAKERS_REPEAT_FOREVER_TOOLTIP = "repeat";
 Blockly.Msg.FIRSTMAKERS_ON_KEY_TITLE = "when key";
 Blockly.Msg.FIRSTMAKERS_ON_KEY_TOOLTIP = "when key";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TITLE = "servo in pin %1 at %2 degrees";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TOOLTIP = "servo motor setting";
+Blockly.Msg.FIRSTMAKERS_MOTOR_SPEED_TITLE = "DC motor %1 speed at %2";
+Blockly.Msg.FIRSTMAKERS_SET_SERVO_TOOLTIP = "set DC motor speed";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TITLE = "direction of DC motor %1 is %2";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_FORWARD = "forward";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_BACKWARD = "backwards";
+Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TOOLTIP = "set DC motor direction";
+Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TITLE = "configure DC motor %1 %2 pin %3 for speed%4 pin %5 for direction";
+Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TOOLTIP = "configure DC motor pins";
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "message";

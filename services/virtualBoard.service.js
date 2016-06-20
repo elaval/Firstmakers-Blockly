@@ -96,14 +96,19 @@ angular.module('tideApp')
       callback(board.pins[pin].value);
     }
     
-    // Write an output to an analog pin. pin is the number of the pin and the value is between 0 and 255.
+    // Write an output to an pwm pin. pin is the number of the pin and the value is between 0 and 255.
     board.analogWrite = function(pin,value) {
-      board.pins[board.analogPins[pin]].value = value;
+      board.pins[pin].value = value;
     }
 
     // Read an input for an analog pin. Every time there is data on the pin the callback will be fired with a value argument.
     board.analogRead = function(pin,callback) {
       callback(board.pins[board.analogPins[pin]].value);
+    }
+
+    // Sets angle to a servo pin. pin is the number of the pin and the angle a numeric value.
+    board.servoWrite = function(pin,angle) {
+      board.pins[pin].value = angle;
     }
 
     return board;

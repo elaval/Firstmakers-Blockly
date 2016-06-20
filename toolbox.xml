@@ -58,6 +58,25 @@
     <block type="digital_pin_off"></block> 
     <block type="read_digital_pin"></block>     
     <block type="read_analog_pin"></block>     
+    <block type="servo">
+      <value name="ANGLE">
+        <block type="math_number">
+          <field name="NUM">180</field>
+        </block>
+      </value>
+    </block> 
+    <block type="motor_config"></block> 
+    <block type="motor_speed">
+      <value name="SPEED">
+        <block type="math_number">
+          <field name="NUM">100</field>
+        </block>
+      </value>
+    </block> 
+    <block type="motor_direction"></block> 
+
+    
+
   </category>
   <category name="CAT_TEXT"  colour="160" >
      <block type="say">

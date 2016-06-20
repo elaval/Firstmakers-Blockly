@@ -64,7 +64,7 @@ angular.module('tideApp')
   
   function createDevice(_board) {
     var board = _board;
-    var device = {}
+    var device = {};
     var sensorValues = {
       'potentiometer': 0,
       'temperature' : 0,
@@ -75,7 +75,8 @@ angular.module('tideApp')
       'button':false,
       'pins' : board.pins,
       'analogPins' : board.analogPins      
-    }
+    };
+    var motors = {};
     
     device.sensorValues = function() {
       return sensorValues;
@@ -199,7 +200,54 @@ angular.module('tideApp')
         resolve(board.pins[analogPin].value);
       });
     }
-    
+
+    device.servoWrite = function(pin,angle) {
+        board.pinMode(pin, board.MODES.SERVO);
+        board.servoWrite(pin, angle);
+    }
+
+    device.motorConfig = function(id,powerPin,dirPin) {
+      if (!motors[id]) {
+        motors[id] = {};
+      }
+      motors[id].powerPin = powerPin;
+      motors[id].dirPin = dirPin;
+    }
+
+    device.motorSpeed = function(id,speed) {
+      var powerPin = 3;  // Default value
+      if (motors[id] && motors[id].powerPin) {
+        powerPin = motors[id].powerPin;
+      }
+
+      // Speed is expected to be a number between 0 and 100
+      // Need to convert it to integer between 0 and 255
+
+      speed = speed > 100 ? 100 : speed;
+      speed = speed < 0 ? 0 : speed;
+
+      var value = Math.floor(255*speed/100);
+
+      board.pinMode(powerPin, board.MODES.PWM);
+      board.analogWrite(powerPin,value)
+
+    }
+
+    device.motorDirection = function(id,dir) {
+      var dirPin = 8;  // Default value
+      if (motors[id] && motors[id].dirPin) {
+        dirPin = motors[id].dirPin;
+      }
+
+      // dir is expected to be 0 or 1
+      var value = dir !== 0 ? board.HIGH : board.LOW
+
+      board.pinMode(dirPin, board.MODES.OUTPUT);
+      board.digitalWrite(dirPin,value)
+
+    }
+
+
     device.light = function(on) {
         board.pinMode(13, board.MODES.OUTPUT);
         board.digitalWrite(13, on ? board.HIGH : board.LOW);
