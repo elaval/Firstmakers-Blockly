@@ -13,13 +13,16 @@ Software overview
 Firstmakers-blockly is an html/javascript application that runs embedded in a Desktop app using nwjs (formerly node-webkit).  It combines the power of traditional javascript libraries (such as blockly) with nodejs modules (which allow communication through usb/serial ports).
 
 We have added some additional blocks to the standard Blocly blocks (particularly in the Firstmakers category) which allows the user to visually create a program that interacts wih Arduino boards and the Firstmakers shield.  For example the user can turn on the while light, read the values of the temperature sensor or write into a digital pin.
+
 [TO DO: ADD IMAGES].
 
 The interface provides an onscreen version of a Firstmakers shield which allows to try some code without a physical board connected to the computer.
+
 [TO DO: ADD IMAGE].
+
 If a physical board is connected to a USB port, the board will be automatically recognised and connected. The software uses teh firmata protocol to send commands to the board over the seriual port (and the board needs to have the firmata skecth already loaded to recognise commands).
 
-For additional information on the software architecture, instructions to add/modify blocks and technical background, please go to our technical documentation.
+For additional information on the software architecture, instructions to add/modify blocks and technical background, please go to our technical documentation.[Firstmakers-Blockly technical documentation](https://github.com/elaval/Firstmakers-Blockly/wiki/)
 
 
 
