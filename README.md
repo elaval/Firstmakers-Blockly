@@ -6,8 +6,6 @@ First makers includes hardware (e.g. a shield that can be placed on top of Ardui
 This repository contains the base code for Firstmakers "Blockly version", based on Google's blockly software (https://developers.google.com/blockly/).
 
 
-----------
-
 Architecture overview
 -------
 Firstmakers-blockly is an html/javascript application that runs embedded in a Desktop app using nwjs (formerly node-webkit).  It combines the power of traditional javascript libraries (such as blockly) with nodejs modules (which allow communication through usb/serial ports).
@@ -22,6 +20,8 @@ The code is structured using AngularJS 1.5 and has the following main dependenci
   - Firmata (nodejs module)
   - Serialport (nodejs module)
   
+![screenshot](images/screenshot.png)
+
   
 
 
