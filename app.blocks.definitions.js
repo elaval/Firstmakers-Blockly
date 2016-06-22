@@ -555,6 +555,51 @@ angular.module('tideApp')
   };
 
   // -----------
+  // analog_write
+  // -----------
+  Blockly.Blocks['analog_write'] = {
+    init: function() {
+      this.jsonInit({
+        "message0": Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TITLE,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "PIN",
+            "options": [["3", "3"], ["5", "5"],["6", "6"],["9", "9"], ["10", "10"], ["11", "11"]]
+          },
+          {
+            "type": "input_value",
+            "name": "VALUE",
+            "check": "Number"
+          }
+        ],
+      });
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.firstmakers.HUE);
+      this.setTooltip(Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TOOLTIP);
+      this.setHelpUrl('http://www.firstmakers.com/');
+    }
+  };
+ 
+  Blockly.JavaScript['analog_write'] = function(block) {
+    var pin = block.getFieldValue('PIN');
+    if (block.getField('VALUE')) {
+      // Internal number.
+      var value = String(Number(block.getFieldValue('VALUE')));
+    } else {
+      // External number.
+      var value = Blockly.JavaScript.valueToCode(block, 'VALUE',
+          Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+    }
+    var code = 'fm_analogWrite('+pin+','+value+');\n';
+    return code;
+  };
+
+
+
+  // -----------
   // servo
   // -----------
   Blockly.Blocks['servo'] = {
@@ -744,9 +789,6 @@ angular.module('tideApp')
     var code = 'fm_motor_direction("'+motorId+'",'+direction+');\n';
     return code;
   };
-
-
-
 
 
  Blockly.Blocks['getXhr'] = {

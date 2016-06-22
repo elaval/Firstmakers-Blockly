@@ -65,6 +65,9 @@ Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_BACKWARD = "atrás";
 Blockly.Msg.FIRSTMAKERS_MOTOR_DIRECTION_TOOLTIP = "configurar dirección de motor";
 Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TITLE = "configurar motor DC %1 %2pin %3 para velocidad%4 pin %5 para dirección";
 Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TOOLTIP = "configurar pines de motor dc";
+Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TITLE = "fijar pin PWM %1 en %2";
+Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TOOLTIP = "fijar valor de pin PWM (escritura análoga)";
+
 
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "mensaje";

@@ -156,7 +156,7 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
 
   }
   
-  // Implementation of private functions (not accesible fromoutside the service)
+  // Implementation of private functions (not accesible from outside the service)
   // =========================================================
 
   /**
@@ -319,6 +319,16 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
       return interpreter.createPrimitive(DeviceCommandService.digitalWrite(pin,value));
     };
     interpreter.setProperty(scope, 'fm_digitalWrite',
+        interpreter.createNativeFunction(wrapper));
+
+    // analogWrite(pin,value)
+    wrapper = function(pin,value) {
+      pin = pin ? pin.toNumber() : 13;
+      value = value ? value.toNumber() : 0;
+
+      return interpreter.createPrimitive(DeviceCommandService.analogWrite(pin,value));
+    };
+    interpreter.setProperty(scope, 'fm_analogWrite',
         interpreter.createNativeFunction(wrapper));
 
     // digitalRead(pin).

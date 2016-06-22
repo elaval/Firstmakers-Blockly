@@ -201,6 +201,18 @@ angular.module('tideApp')
       });
     }
 
+    device.analogWrite = function(pin,value) {
+      // Make sure value is between 0 and 100
+      value = value > 100 ? 100 : value;
+      value = value < 0 ? 0 : value;
+
+      // Transform into a value betwen 0 and 255
+      var transformedValue = Math.floor(255*value/100);
+
+      board.pinMode(pin, board.MODES.PWM);
+      board.analogWrite(pin,transformedValue)
+    }
+
     device.servoWrite = function(pin,angle) {
         board.pinMode(pin, board.MODES.SERVO);
         board.servoWrite(pin, angle);

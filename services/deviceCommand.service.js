@@ -37,7 +37,7 @@ angular.module('tideApp')
   myself.motorConfig = motorConfig;
   myself.motorSpeed = motorSpeed;
   myself.motorDirection = motorDirection;
-
+  myself.analogWrite = analogWrite;
 
   
   // Local variables
@@ -75,6 +75,17 @@ angular.module('tideApp')
       physicalDevice.digitalWrite(pin,value);
     }
     
+  }
+
+  // analogWrite
+  function analogWrite(pin,value) {
+    if (virtualDevice) {
+      virtualDevice.analogWrite(pin,value);
+    }
+    
+    if (physicalDevice) {
+      physicalDevice.analogWrite(pin,value);
+    } 
   }
   
   // digitalRead
