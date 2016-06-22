@@ -29,7 +29,6 @@ angular.module('tideApp')
   myself.isBoardReady = isBoardReady;
   
   var Board = require("firmata");
-  var five = require("johnny-five");
 
   var arduino = {
     board : undefined,	// Reference to arduino board - to be created by new firmata.Board()
