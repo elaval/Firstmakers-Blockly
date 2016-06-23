@@ -109,6 +109,7 @@
         <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting" translate>CONNECT_FIRSTMAKERS</span></p>
         <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false" translate>CONNECT</button>
         <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && controller.platform == 'win32'" translate>DISCONNECT</button>
+        {{controller.platform}}
       </div>
     </div>
     
