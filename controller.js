@@ -71,7 +71,9 @@ angular.module('tideApp')
     myself.physicalBoard = null;
     myself.running = false; // The code is running
 
+    // Platform/Architecture - used to identify win 32 architecture (it has some issues detecting disconnections)
     myself.platform = process.platform;
+    myself.arch = process.arch;
     
     // Local variables/properties
     var physicalDevice = null;
