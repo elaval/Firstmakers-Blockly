@@ -70,6 +70,8 @@ angular.module('tideApp')
     myself.virtualBoard = null;
     myself.physicalBoard = null;
     myself.running = false; // The code is running
+
+    myself.platform = process.platform;
     
     // Local variables/properties
     var physicalDevice = null;
