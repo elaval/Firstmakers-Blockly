@@ -69,9 +69,10 @@ var Serial = {
       if (!ports.length) {
 
         // Retry Serial connection
-        $timeout(100, function() {
+        $timeout(100)
+        .then(function() {
             Serial.detect.call(this, callback);
-        })
+        });
         return;
       }
 
