@@ -30,6 +30,15 @@
   "CAT_INTERNET" : "Internet",
   "CAT_ARDUINO" : "Arduino",
   "MSG_HELLO": "Hello!",
-  
+  "UNTITLED": "Untitled",
+  "TITLE": "Title",
+  "MUST_SIGN_IN_WARNING" : "User needs to sign in to use this option",
+  "SAVE_SKETCH_AS" : "Save as ...",
+  "OPEN_SKETCH" : "Open",
+  "SIGN_IN": "Sign In",
+  "SIGN_OUT": "Sign Out",
+  "USER_SIGN_IN" : "User Sign In",
+  "USER_SIGN_UP" : "User Sign Up",
+
   "__DUMMY__" : "no trailing comma"
 }

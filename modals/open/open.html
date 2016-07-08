@@ -1,0 +1,15 @@
+
+<div class="modal-header">
+    <h3 class="modal-title">Skecthes</h3>
+</div>
+<div class="modal-body">
+    <div class="radio" ng-repeat="sketch in controller.sketches">
+        <label><input ng-model="controller.selectedSketch" type="radio" ng-value="sketch" name="optradio">{{sketch.title}}</label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="controller.delete(controller.selectedSketch)" ng-disabled="!(controller.selectedSketch)">Remove</button>
+    <button class="btn btn-primary" type="button" ng-click="controller.open(controller.selectedSketch)" ng-disabled="!(controller.selectedSketch)">Open</button>
+    <button class="btn btn-warning" type="button" ng-click="controller.cancel()">Cancel</button>
+</div>
+

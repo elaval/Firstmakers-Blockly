@@ -9,7 +9,9 @@ angular
     'ui.bootstrap',
     'external_module_wrapper',
     'pascalprecht.translate',
-    'ngCookies'
+    'ngCookies',
+    'angular-jwt'
+
   ]);
 
 angular.module('tideApp')

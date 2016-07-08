@@ -16,13 +16,26 @@ angular.module('tideApp')
 .controller('AppController', ['$scope','$http','$timeout','$log','$q','$window',
         '$interval','$uibModal','$translate','_','d3', 'BlocklyService', 
         'BoardService','SerialService','VirtualBoardService',
-        'DeviceService','DeviceCommandService',
+        'DeviceService','DeviceCommandService', 'authService','dataService',
     function ($scope,$http,$timeout,$log,$q,$window,
         $interval,$uibModal,$translate,_,d3, BlocklyService, 
         BoardService,SerialService, VirtualBoardService,
-        DeviceService, DeviceCommandService) 
+        DeviceService, DeviceCommandService, authService, dataService) 
     {
 	var myself = this;
+
+    /**
+     * Warning
+     * 
+     * app.config.js defines an http interceptor that injects an access_toke to any http request
+     * based on stored access_token
+     * 
+     * For some requests (local templates, svg, json files) the token is not needed and
+     * an excemption must explicitly defined in the code.
+     * 
+     * The first time the code is run no access_tokes has been created and this interceptor could generate an error
+     * if the excemtion has not been placed
+     */
     
     // Public functions (accesible from the view)
     myself.runCode = runCode
@@ -38,6 +51,15 @@ angular.module('tideApp')
     myself.saveAsFile = saveAsFile;
     myself.onKeyDown = onKeyDown;    
     myself.onKeyUp = onKeyUp;
+    myself.manageSketches = manageSketches;
+    myself.saveSketch = saveSketch;
+    myself.signOut = signOut;
+    myself.signIn = signIn;
+
+
+    // Public attributes
+    this.username = null;
+    this.sketchTitle = null;
 
     const spawn = require('child_process').spawn;
     /*
@@ -86,6 +108,9 @@ angular.module('tideApp')
     
     // Controler's 'constructor'
     function activate() {
+        // Attempt to Sign In using stored tokens
+        // If succesful, a signIn event will be received
+        authService.signInWithToken();        
         
         // Retreive stored language definition
         var langKey = $translate.storage().get($translate.storageKey());
@@ -248,27 +273,57 @@ angular.module('tideApp')
     }
     
     /**
-     * Load blocks saved in session/local storage.
-     * @param {string} defaultXml Text representation of default blocks.
+     * Load blocks into the worplspace
+     * 
+     * If an valid sketch is given (for example retreived form the cloud), that sketch will be loaded.
+     * 
+     * If not, and there is a valid sketch previously stored in localstorage, that sketch will be laoded.
+     * 
+     * If none of the above, a default skecth will be loaded.
+     * 
+     * @param {string} sketch.
+     * 
+     * sketcj is an object with the following attributes:
+     * {
+     *  id: unique id for this user,
+     *  title: sketcth title,
+     *  blocks: string representation of blocks xml
+     * }
+     * 
+     * If 
      */
-    function loadBlocks(defaultXml) {
-        
-        try {
-            var savedBlocks = $window.localStorage.savedBlocks;
-        } catch(e) {
-            var saveBlocks = null;
+    function loadBlocks(sketch) {
+        $log.debug(sketch);
+
+        var id, title, blocks;
+
+        if (sketch && sketch.id) {
+            blocks = sketch.blocks;
+            $window.localStorage.sketchTitle = sketch.title;
+            $window.localStorage.sketchId = sketch.id;
+            myself.sketchTitle = sketch.title;
+        } else {
+            try {
+                blocks = $window.localStorage.savedBlocks;
+                title = $window.localStorage.sketchTitle;
+                myself.sketchTitle = title;
+            } catch(e) {
+                // Assume default sketch
+                blocks = '<xml>' +
+                '  <block type="light_on" deletable="true" x="70" y="70">' +
+                '  </block>' +
+                '</xml>';
+
+                $translate('UNTITLED').then(function (title) {
+                    $window.localStorage.sketchTitle = title;
+                });
+                $window.localStorage.sketchId = "";
+            }
         }
-        
-        if (savedBlocks) {
-            // Load the editor with previously saved blocks.
-            var xml = Blockly.Xml.textToDom(savedBlocks);
-            Blockly.Xml.domToWorkspace(xml, myself.workspace);
-        } else if (defaultXml) {
-            // There are no previously saved blocks ...
-            // Load the editor with default starting blocks.
-            var xml = Blockly.Xml.textToDom(defaultXml);
-            Blockly.Xml.domToWorkspace(xml, myself.workspace);
-        }
+
+        var xml = Blockly.Xml.textToDom(blocks);
+        myself.workspace.clear();
+        Blockly.Xml.domToWorkspace(xml, myself.workspace);
     };
     
     /**
@@ -326,14 +381,8 @@ angular.module('tideApp')
         // Listen to changes in the workspace & call onChangeWorkspace 
         myself.workspace.addChangeListener(onWorkspaceChange);
    
-        
-        // Load default code in case that there a workspace has not been previously saved
-        var defaultXml =
-          '<xml>' +
-          '  <block type="light_on" deletable="true" x="70" y="70">' +
-          '  </block>' +
-          '</xml>';
-        loadBlocks(defaultXml);
+    
+        loadBlocks();
     }
     
     /**
@@ -605,8 +654,139 @@ angular.module('tideApp')
         }
     );
     
+
+    /*********************************
+     * Sing In / Out / Up functionality
+     *********************************/
     
+        // Public methods
+
+
+    $scope.$on('signIn', function(evt, username) {
+        myself.username = username;
+    })
+
+    $scope.$on('signOut', function() {
+        myself.username = null
+    })
+
+    /**
+     * Initiates signout procedure
+     */
+    function signOut() {
+        authService.signOut();
+    }
+
+    /**
+     * Triggers signIn modal window
+     */
+    function signIn(size) {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'modals/login/login.html',
+            controller: 'LoginController as controller',
+            size: size,
+            resolve: {
+            }
+        });
+
+        modalInstance.result.then(function (credentials) {
+            if (credentials.registration) {
+                alert("Reg "+ credentials.email + credentials.username + credentials.password)
+            } else {
+                authService.signIn(credentials.email, credentials.password)
+            }
+            
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     
+    /**
+     * manageSketches
+     */
+    function manageSketches(size) {
+
+        // Check if user is signed In 
+        if (myself.username) {
+
+            dataService.getSketches()
+            .then(function(sketches) {
+                myself.sketches = sketches;
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'modals/open/open.html',
+                    controller: 'OpenController as controller',
+                    size: size,
+                    resolve: {
+                        sketches: function () {
+                            return myself.sketches;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (sketch) {
+                    // Load the editor with previously saved blocks.
+                    loadBlocks(sketch);;                
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            })
+        
+        } else {
+            $translate("MUST_SIGN_IN_WARNING")
+            .then(function(text) {
+                alert(text);
+            })
+        }
+        
+    }
+
+    /**
+     * saveSketch
+     */
+    function saveSketch() {
+
+        // Check if user is signed In 
+        if (myself.username) {
+
+            var xml = Blockly.Xml.workspaceToDom(myself.workspace);
+            var blocks = Blockly.Xml.domToText(xml);
+            var id = $window.localStorage.sketchId ? $window.localStorage.sketchId : null;
+            var title = $window.localStorage.sketchTitle ? $window.localStorage.sketchTitle : null ;
+
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'modals/save/save.html',
+                controller: 'SaveController as controller',
+                size: null,
+                resolve: {
+                    sketch: function () {
+                        return {
+                            id : id,
+                            title: title,
+                            blocks: blocks
+                        };
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (sketch) {
+                $window.localStorage.sketchTitle = sketch.title;
+                myself.sketchTitle = sketch.title;
+                
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+
+        } else {
+            $translate("MUST_SIGN_IN_WARNING")
+            .then(function(text) {
+                alert(text);
+            })
+        }
+
+    }
                 
                 
 }]);

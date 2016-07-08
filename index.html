@@ -49,16 +49,29 @@
       <ul class="nav navbar-nav">
         <li><a href="#" translate>BLOCKLY_VERSION</a></li>
       </ul>
+      <form class="navbar-form navbar-right">
+        <button ng-hide="controller.username" ng-click="controller.signIn()"  class="btn btn-default" translate>SIGN_IN</button>
+        <button ng-show="controller.username" ng-click="controller.signOut()"  class="btn btn-default" translate>SIGN_OUT</button>
+      </form>
       <ul class="nav navbar-nav navbar-right">
+        <li><a>{{controller.username}}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!--
         <li>
           <div id="upload" file-input="controller.file" on-change="controller.openFile()" style="display: none;"></div>
           <a href="#" uploadfile><span translate>BUTTON_OPEN</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
         </li>
-        <li><a ng-click="controller.saveAsFile()" href="#"><span translate>BUTTON_SAVE</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
+        -->
+        <li><a ng-click="controller.saveSketch()" href="#"><span translate>SAVE_SKETCH_AS</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
+        <li><a ng-click="controller.manageSketches()" href="#"><span translate>OPEN_SKETCH</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a></li>        
+        <!--
+          <li><a ng-click="controller.saveAsFile()" href="#"><span translate>BUTTON_SAVE</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
+        -->
         <li><a ng-click="controller.clearBlocks()" href="#"><span translate>BUTTON_CLEAR_BLOCKS</span> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>        
         <li ng-class="{'active': controller.selectedLanguage == 'es'}"><a ng-click="controller.changeLanguage('es')" href="#" translate="BUTTON_LANG_ES"></a></li>        
         <li ng-class="{'active': controller.selectedLanguage == 'en'}"><a ng-click="controller.changeLanguage('en')" href="#" translate="BUTTON_LANG_EN"></a></li>        
-        
+
         <!--
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -91,9 +104,19 @@
     <div class="row">
       
       <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+        
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <button ng-show="!controller.running" ng-click="controller.runCode()" type="button" class="btn btn-default text-right"><img src="./images/play.png" width="20"/> <span translate>CODE_RUN</span></button>
+            <button ng-show="controller.running" ng-click="controller.stopCode()" type="button" class="btn btn-default"><img src="./images/stop.png" width="20"/> <span translate>CODE_STOP</span></button>
+          </div>
+          <div class="col-xs- col-sm-9 col-md-9 col-lg-9">
+            <span translate>TITLE</span> : {{controller.sketchTitle}}
+          </div>
+        </div>
+        
 
-          <button ng-show="!controller.running" ng-click="controller.runCode()" type="button" class="btn btn-default text-right"><img src="./images/play.png" width="20"/> <span translate>CODE_RUN</span></button>
-          <button ng-show="controller.running" ng-click="controller.stopCode()" type="button" class="btn btn-default"><img src="./images/stop.png" width="20"/> <span translate>CODE_STOP</span></button>
+
 
           <blockly options="controller.blocklyOptions" workspace="controller.workspace" on-injected="controller.onInjected"></blockly>
 
@@ -144,6 +167,7 @@
     <script src="./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="./bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="./bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="./bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="./external_module_wrapper.js"></script>
     <script src="./acorn.js"></script>
     <script src="./interpreter.js"></script>
@@ -152,14 +176,24 @@
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="app.js"></script>
+    <script src="app.config.js"></script>
     <script src="app.blocks.definitions.js"></script>
+
     <script src="controller.js"></script>
+    <script src="modals/login/login.controller.js"></script>
+    <script src="modals/open/open.controller.js"></script>
+    <script src="modals/save/save.controller.js"></script>
+
     <script src="services/blockly.service.js"></script>    
     <script src="services/board.service.js"></script>
     <script src="services/virtualBoard.service.js"></script>    
     <script src="services/device.service.js"></script>    
     <script src="services/deviceCommand.service.js"></script>    
     <script src="services/serial.service.js"></script>
+    <script src="services/auth.service.js"></script>
+    <script src="services/data.service.js"></script>
+    <script src="services/localstorage.service.js"></script>
+    
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>
     <script src="directives/uploadfile.js"></script>

@@ -1,0 +1,30 @@
+
+<div class="modal-header">
+    <h3 class="modal-title"><span  ng-hide="controller.newRegistration" translate>USER_SIGN_IN</span><span  ng-show="controller.newRegistration" translate>USER_SIGN_UP</span></h3>
+</div>
+<div class="modal-body">     
+    <form class="form-signin">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input ng-model="controller.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input ng-model="controller.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="text-muted">{{controller.message}}</div>
+        <div class="checkbox">
+            <label>
+            <input ng-model="controller.newRegistration" type="checkbox" value="controller.newRegistration"> New registration (I have not created an account)
+            </label>
+        </div>
+        <div ng-show="controller.newRegistration" >
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input ng-model="controller.username" type="text" id="inputUsername" class="form-control" placeholder="Username (text without spaces)">
+        </div>
+    </form>
+    
+</div>
+<div class="modal-footer">
+    <button ng-hide="controller.newRegistration" class="btn btn-primary" type="button" ng-click="controller.signIn()" ng-disabled="!(controller.email && controller.password)">Sign In</button>
+    <button ng-show="controller.newRegistration" class="btn btn-primary" type="button" ng-click="controller.signUp()" ng-disabled="!(controller.email && controller.password && controller.username)">Sing Up</button>
+    <button class="btn btn-warning" type="button" ng-click="controller.cancel()">Cancel</button>
+</div>
+

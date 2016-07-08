@@ -1,0 +1,14 @@
+
+<div class="modal-header">
+    <h3 class="modal-title">Skecthes</h3>
+</div>
+<div class="modal-body">
+    <input ng-model="controller.sketch.title" type="text" id="inputUsername" class="form-control" placeholder="Sketch title">
+    <div class="text-error" data-ng-show="controller.updateSketch">There is already a sketch with that title</div>
+</div>
+<div class="modal-footer">
+    <button ng-hide="controller.updateSketch" class="btn btn-primary" type="button" ng-click="controller.save(controller.sketch)">Save</button>
+    <button ng-show="controller.updateSketch" class="btn btn-primary" type="button" ng-click="controller.save(controller.sketch)">Replace</button>
+    <button class="btn btn-warning" type="button" ng-click="controller.cancel()">Cancel</button>
+</div>
+
