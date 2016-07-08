@@ -114,7 +114,7 @@ angular.module('tideApp')
 
     var id = sketch && sketch.id ?  sketch.id : null;
 
-    $http.put("http://localhost.firstmakers.com:8080/api/sketches/"+id, 
+    $http.put("https://api.firstmakers.com/api/sketches/"+id, 
     sketch)
     .then(
       function(res) {
@@ -136,7 +136,7 @@ angular.module('tideApp')
   function createSketch(sketch) {
     var deferred = $q.defer();
 
-    $http.post("http://localhost.firstmakers.com:8080/api/sketches", 
+    $http.post("https://api.firstmakers.com/api/sketches", 
     sketch)
     .then(
       function(res) {
@@ -160,7 +160,7 @@ angular.module('tideApp')
 
     var id = sketch.id;
 
-    $http.delete("http://localhost.firstmakers.com:8080/api/sketches/"+id, 
+    $http.delete("https://api.firstmakers.com/api/sketches/"+id, 
     sketch)
     .then(
       function(res) {
