@@ -37,8 +37,38 @@
   "OPEN_SKETCH" : "Abrir",
   "SIGN_IN": "Ingresar",
   "SIGN_OUT": "Salir",
+  "SIGN_UP": "Registar",
   "USER_SIGN_IN" : "Ingreso de usuario",
   "USER_SIGN_UP" : "Registro de usuario",
+  "EMAIL_ADDRESS" : "Dirección de email",
+  "PASSWORD" : "Contraseña",
+  "NEW_REGISTRATION": "Registrar un nuevo usuario",
+  "FORGOT_PASSWORD" : "Olvidé mi contraseña",
+  "USERNAME": "Nombre de usuario (texto sin espacio)", 
+  "CANCEL": "Cancelar",
+  "RESET_PASSWORD": "Cambiar contraseña",
+  "MSG_EMAIL_SENT" : "Se envió un correo a {{email}} con un enlace para cambiar la contraseña. Este enlace será válido por un breve período de tiempo.",
+  "MSG_EMAIL_ERROR": "No se pudo cambiar la contraseña para {{email}}. Ingrese un correo electrónico válido.",
+  "ERROR_SIGNIN": "Error al ingresar usuario",
+  "ERROR_SIGNIN_INVALID_EMAIL" : "No hay ningún usuario registrado con este email",
+  "ERROR_SIGNIN_INVALID_PASSWORD" :  "Contraseña incorrecta",
+  "ERROR_SIGNIN_SAVE_TOKEN" : "Error al configurar autenticación persistente",
+  "ERROR_SIGNIN_NO_EMAIL_PASSWORD" :"Debe proveer un email y contraseña para ingresar a la cuenta",
+  "MSG_REGISTRATION_INFO" : "Para registrar un nuevo usuario, debe indicar una dirección de correo electrónico, una contraseña y un nombre de usuario.",
+  "MSG_FORGOT_PASSWORD_INFO" : "Para recuperar su contraseña, se enviará un correo electrónico con instrucciones a la dirección de correo electrónico indicada.",
+  
+  "ERROR_FORGOT_PASSWORD_REQUEST" :   "Error en la solicitud de cambio de contraseña",
+  "ERROR_FORGOT_PASSWORD_CHECKING" :   "Error al chequear si el email es válido",
+  "ERROR_FORGOT_PASSWORD_NON_USER" :   "No hay ningún usuario registrado con este email" , 
+  "ERROR_FORGOT_PASSWORD_NO_EMAIL" :   "Error, se requiere un email",
+
+  "ERROR_SIGNUP" : "Error al registrar el usuario",
+  "ERROR_SIGNUP_EMAIL_EXISTS" : "Error: Ya existe un usuario con este email",
+  "ERROR_SIGNUP_USERNAME_EXISTS" : "Error: el nombre de usuario ya ha sido asignado a otro usuario",
+  "ERROR_SIGNUP_USER_VALIDATION_FAILED" : "Error al validar el usuario",
+  "ERROR_SIGNUP_USER_SAVE_ERROR" : "Error almacenando el nuevo usuario",
+  "ERROR_SIGNUP_LACK_EMAIL_USERNAME_PASSWORD" : "Se requiere un email, contraseña y nombre de usuario válido",
+
 
   "__DUMMY__" : "no trailing comma"
 }

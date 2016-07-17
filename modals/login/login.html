@@ -5,26 +5,37 @@
 <div class="modal-body">     
     <form class="form-signin">
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input ng-model="controller.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input ng-model="controller.email" type="email" id="inputEmail" class="form-control" placeholder="{{'EMAIL_ADDRESS' | translate}}" required autofocus>
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input ng-model="controller.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="text-muted">{{controller.message}}</div>
-        <div class="checkbox">
-            <label>
-            <input ng-model="controller.newRegistration" type="checkbox" value="controller.newRegistration"> New registration (I have not created an account)
-            </label>
+        <div ng-hide="controller.forgotPassword" >
+            <label for="inputPassword" class="sr-only" translate>PASSWORD</label>
+            <input ng-model="controller.password" type="password" id="inputPassword" class="form-control" placeholder="{{'PASSWORD' | translate}}" required>
         </div>
         <div ng-show="controller.newRegistration" >
             <label for="inputUsername" class="sr-only">Username</label>
-            <input ng-model="controller.username" type="text" id="inputUsername" class="form-control" placeholder="Username (text without spaces)">
+            <input ng-model="controller.username" type="text" id="inputUsername" class="form-control" placeholder="{{'USERNAME' | translate}}">
+        </div>
+        <div class="checkbox">
+            <label>
+            <input ng-model="controller.newRegistration" type="checkbox" value="controller.newRegistration" ng-change="controller.registrationMode()" translate>{{'NEW_REGISTRATION' | translate}}
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input ng-model="controller.forgotPassword" type="checkbox" value="controller.forgotPassword" ng-change="controller.forgotPasswordMode()">{{'FORGOT_PASSWORD' | translate}}
+            </label>
         </div>
     </form>
+    <div ng-show="controller.message" class="alert alert-danger text-muted">{{controller.message}}</div>
+    <div ng-show="controller.emailSent" class="alert alert-info text-center" translate="MSG_EMAIL_SENT" translate-value-email="{{controller.email}}"></div>
+    <div ng-show="controller.newRegistration" class="alert alert-warning text-center" translate>MSG_REGISTRATION_INFO</div>
+    <div ng-show="controller.forgotPassword" class="alert alert-warning text-center" translate>MSG_FORGOT_PASSWORD_INFO</div>
     
 </div>
 <div class="modal-footer">
-    <button ng-hide="controller.newRegistration" class="btn btn-primary" type="button" ng-click="controller.signIn()" ng-disabled="!(controller.email && controller.password)">Sign In</button>
-    <button ng-show="controller.newRegistration" class="btn btn-primary" type="button" ng-click="controller.signUp()" ng-disabled="!(controller.email && controller.password && controller.username)">Sing Up</button>
-    <button class="btn btn-warning" type="button" ng-click="controller.cancel()">Cancel</button>
+    <button ng-hide="controller.newRegistration || controller.forgotPassword" class="btn btn-primary" type="button" ng-click="controller.signIn()" ng-disabled="!(controller.email && controller.password)" translate>SIGN_IN</button>
+    <button ng-show="controller.newRegistration" class="btn btn-primary" type="button" ng-click="controller.signUp()" ng-disabled="!(controller.email && controller.password && controller.username)" translate>SIGN_UP</button>
+    <button ng-show="controller.forgotPassword" class="btn btn-primary" type="button" ng-click="controller.resetPassword()" ng-disabled="!(controller.email)" translate>RESET_PASSWORD</button>
+    <button class="btn btn-warning" type="button" ng-click="controller.cancel()" translate>CANCEL</button>
 </div>
 
