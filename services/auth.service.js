@@ -73,7 +73,7 @@ function($rootScope, $http, $q, d3, localstorage, jwtHelper) {
   function signUp(email, password, username, language) {
     var deferred = $q.defer();
 
-    $http.post("https://api.firstmakers.com/api/auth/signup?lang="+language",{
+    $http.post("https://api.firstmakers.com/api/auth/signup?lang="+language,{
     //$http.post("http://localhost.firstmakers.com:8080/api/auth/signup",{
       'email':email,
       'password':password,
