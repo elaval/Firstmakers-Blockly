@@ -16,13 +16,16 @@ angular.module('tideApp')
 .controller('AppController', ['$scope','$http','$timeout','$log','$q','$window',
         '$interval','$uibModal','$translate','_','d3', 'BlocklyService', 
         'BoardService','SerialService','VirtualBoardService',
-        'DeviceService','DeviceCommandService', 'authService','dataService',
+        'DeviceService','DeviceCommandService', 'authService','dataService', 'nameGeneratorService',
+        'mqttService',
     function ($scope,$http,$timeout,$log,$q,$window,
         $interval,$uibModal,$translate,_,d3, BlocklyService, 
         BoardService,SerialService, VirtualBoardService,
-        DeviceService, DeviceCommandService, authService, dataService) 
+        DeviceService, DeviceCommandService, authService, dataService, nameGeneratorService,
+        mqttService) 
     {
 	var myself = this;
+
 
     /**
      * Warning
@@ -122,8 +125,11 @@ angular.module('tideApp')
         })
         
         myself.virtualBoard = VirtualBoardService.createVirtualBoard();
+
         virtualDevice = DeviceService.createDevice(myself.virtualBoard);
         DeviceCommandService.setVirtualDevice(virtualDevice);
+
+        configureDeviceName();
         
         scanPorts();
     }
@@ -133,6 +139,7 @@ angular.module('tideApp')
     
     $interval(function() {
         updateBlocks();
+        publishBoardValues();
     }, 100);
     
     
@@ -147,6 +154,18 @@ angular.module('tideApp')
                 block.updateSensor && block.updateSensor(physicalDevice.sensorValues());
             }
         }
+    }
+
+    /**
+     * Update board values publications through mqtt
+     */
+    function publishBoardValues() {
+        if (physicalDevice) { 
+            mqttService.publishPinValues(myself.deviceName,physicalDevice.sensorValues().pins)
+        } else if (virtualDevice) {
+            mqttService.publishPinValues(myself.deviceName,virtualDevice.sensorValues().pins)
+        }
+    
     }
 
     /**
@@ -664,6 +683,8 @@ angular.module('tideApp')
 
     $scope.$on('signIn', function(evt, username) {
         myself.username = username;
+
+        mqttService.notifySignin();
     })
 
     $scope.$on('signOut', function() {
@@ -786,6 +807,24 @@ angular.module('tideApp')
             })
         }
 
+    }
+
+    /**
+     * configure deviceName
+     * If no name has been given to the device (connected board), we will generate a random
+     * name and store it for next sessions
+     * 
+     */
+
+    function configureDeviceName() {
+
+        if ($window.localStorage.deviceName) {
+            myself.deviceName = $window.localStorage.deviceName;
+        } else {
+            myself.deviceName = nameGeneratorService.createName();
+            $window.localStorage.deviceName = myself.deviceName;
+        }
+        
     }
                 
                 

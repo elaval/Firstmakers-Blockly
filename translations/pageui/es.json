@@ -4,7 +4,7 @@
   "CODE_STOP" : "Detener el código",
   "VIRTUAL_BOARD" : "Tarjeta virtual",
   "VIRTUAL_BOARD_MSG" : "Tu programa funcionará con la siguiente tarjeta virtual para hacer pruebas limitadas",
-  "VIRTUAL_BOARD_MSG_2" : "Pero la experienca es mejor con una tarjeta real.",
+  "VIRTUAL_BOARD_MSG_2" : "Pero la experiencia es mejor con una tarjeta real.",
   "CONNECT_FIRSTMAKERS" : "Connecta tu tarjeta Firstmakers.",
   "CONNECT" : "Conectar",
   "DISCONNECT" : "Desconectar",
@@ -68,6 +68,8 @@
   "ERROR_SIGNUP_USER_VALIDATION_FAILED" : "Error al validar el usuario",
   "ERROR_SIGNUP_USER_SAVE_ERROR" : "Error almacenando el nuevo usuario",
   "ERROR_SIGNUP_LACK_EMAIL_USERNAME_PASSWORD" : "Se requiere un email, contraseña y nombre de usuario válido",
+
+  "DEVICE_NAME" : "Nombre de dispositivo:",
 
 
   "__DUMMY__" : "no trailing comma"

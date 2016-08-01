@@ -115,24 +115,29 @@
           </div>
         </div>
         
-
-
-
-          <blockly options="controller.blocklyOptions" workspace="controller.workspace" on-injected="controller.onInjected"></blockly>
-
-          <blockly3></blockly2>
+        <!-- Here goes the main workspace -->
+        <blockly options="controller.blocklyOptions" workspace="controller.workspace" on-injected="controller.onInjected"></blockly>
+      
       </div>
       <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
         <h3 class="text-muted small" translate>VIRTUAL_BOARD</h3>
         <p class="text-muted small" translate>VIRTUAL_BOARD_MSG</p>
+
+
+        <!-- Here goes the virtual board -->
         <div virtual-firstmakers state="controller.state" board="controller.virtualBoard"></div>
+        
         <p class="text-muted small" translate>VIRTUAL_BOARD_MSG_2</p>
         <p><span class="label label-primary" translate>{{controller.statusMessageText}}</span></p>
         <p><span class="label label-default" ng-show="controller.boardState.connecting" >{{controller.boardState.port}}</span></p>
         <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting" translate>CONNECT_FIRSTMAKERS</span></p>
         <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false" translate>CONNECT</button>
         <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && controller.platform == 'win32' && controller.arch == 'ia32'" translate>DISCONNECT</button>
-      </div>
+      
+        <p class="text-muted small" translate>DEVICE_NAME</p>
+        <p class="text-muted small label label-default"">{{controller.deviceName}}</p>
+
+      </div>  
     </div>
     
 
@@ -172,6 +177,10 @@
     <script src="./acorn.js"></script>
     <script src="./interpreter.js"></script>
 
+    <script src="http://api.firstmakers.com:3000/mqtt.js"></script>
+
+    
+
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -193,6 +202,8 @@
     <script src="services/auth.service.js"></script>
     <script src="services/data.service.js"></script>
     <script src="services/localstorage.service.js"></script>
+    <script src="services/nameGenerator.service.js"></script>
+    <script src="services/mqtt.service.js"></script>
     
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>

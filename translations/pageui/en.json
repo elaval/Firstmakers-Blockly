@@ -70,5 +70,7 @@
   "ERROR_SIGNUP_LACK_EMAIL_USERNAME_PASSWORD" : "Must provide a valid email, username and password",
   "ERROR_SIGNUP_FAILED_ACTIVATION_EMAIL" : "Error: Failed to send activation email",
 
+  "DEVICE_NAME" : "Device name:",
+
   "__DUMMY__" : "no trailing comma"
 }

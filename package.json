@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "browser-serialport": "^2.0.3",
-    "firmata": "^0.12.0"
+    "firmata": "^0.12.0",
+    "mqtt": "^1.13.0"
   }
 }

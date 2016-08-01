@@ -20,6 +20,7 @@ function($rootScope, $http, $q, d3, localstorage, jwtHelper) {
   this.forgotPassword = forgotPassword;
   this.signInWithToken = signInWithToken;
   this.getAccessToken = getAccessToken;
+  this.getUsername = getUsername;
 
   /**
    * signIn
@@ -226,6 +227,14 @@ function($rootScope, $http, $q, d3, localstorage, jwtHelper) {
 
     return deferred.promise;
   }
+
+  /**
+   * getUsername
+  */
+  function getUsername() {
+    return localstorage.get("username");
+  }
+
 
 }])
 
