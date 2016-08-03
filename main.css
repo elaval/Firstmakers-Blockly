@@ -2,6 +2,7 @@
 body {
   padding-top: 70px;
   padding-bottom: 20px;
+  overflow: hidden;
 }
 
 .navbar-brand {
@@ -195,3 +196,4 @@ path.bottom {
   shape-rendering: crispEdges;
 }
 
+#virtual_board_title{ margin-top: 0px;}

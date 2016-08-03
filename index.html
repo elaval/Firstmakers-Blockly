@@ -1,153 +1,127 @@
 <!doctype html>
 
-<html class="no-js" lang="es"> 
+<html class="no-js" lang="es">
+
 <head>
-  <meta charset="utf-8">
-  <title>Firstmakers Blockly</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css({.tmp,app}) styles/main.css -->
-  <link rel="stylesheet" href="main.css">
-  <!-- endbuild -->
-
-
- 
+    <meta charset="utf-8">
+    <title>Firstmakers Blockly</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="main.css">
+    <!-- endbuild -->
 </head>
+
 <body ng-app="tideApp" ng-controller="AppController as controller" class="ng-cloak" ng-keydown="controller.onKeyDown($event)" ng-keyup="controller.onKeyUp($event)">
-  <!--[if lt IE 7]>
-  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
 
-  <!--
-  <div id="browser_warning">
-    <h3 class="text-muted">Su navegador no soporta algunas funciones modernas (HTML5 / SVG) que son necesarias para el funcionamiento de este visualizador.  Le sugerimos actualizarl el navegador o probar con uno diferente.</h3>
-  </div>
-  -->
+    <!--Navbar-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#humandev-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="./images/firstmakers_logo.jpg" alt="Firstmakers Blockly"></a>
+            </div>
 
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#humandev-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-      <a class="navbar-brand" href="#"><img src="./images/firstmakers_logo.jpg" alt="Firstmakers Blockly"></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#" translate>BLOCKLY_VERSION</a></li>
-      </ul>
-      <form class="navbar-form navbar-right">
-        <button ng-hide="controller.username" ng-click="controller.signIn()"  class="btn btn-default" translate>SIGN_IN</button>
-        <button ng-show="controller.username" ng-click="controller.signOut()"  class="btn btn-default" translate>SIGN_OUT</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a>{{controller.username}}</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <!--
-        <li>
-          <div id="upload" file-input="controller.file" on-change="controller.openFile()" style="display: none;"></div>
-          <a href="#" uploadfile><span translate>BUTTON_OPEN</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
-        </li>
-        -->
-        <li><a ng-click="controller.saveSketch()" href="#"><span translate>SAVE_SKETCH_AS</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
-        <li><a ng-click="controller.manageSketches()" href="#"><span translate>OPEN_SKETCH</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a></li>        
-        <!--
-          <li><a ng-click="controller.saveAsFile()" href="#"><span translate>BUTTON_SAVE</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>        
-        -->
-        <li><a ng-click="controller.clearBlocks()" href="#"><span translate>BUTTON_CLEAR_BLOCKS</span> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>        
-        <li ng-class="{'active': controller.selectedLanguage == 'es'}"><a ng-click="controller.changeLanguage('es')" href="#" translate="BUTTON_LANG_ES"></a></li>        
-        <li ng-class="{'active': controller.selectedLanguage == 'en'}"><a ng-click="controller.changeLanguage('en')" href="#" translate="BUTTON_LANG_EN"></a></li>        
-
-        <!--
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Español</a></li>
-            <li><a href="#">English</a></li>
-          </ul>
-        </li>
-        -->
-      </ul>
-    </div><!-- /.navbar-collapse -->
-
-
-
-
-
-
-
-
-    </div>
-  </nav>
-  
-  <!--
-
-        -->
-
-  <!-- Add your site or application content here -->
-  <!-- container -->
-  <div class="container" ng-cloak > 
-    <div class="row">
-      
-      <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        
-        <div class="row">
-          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button ng-show="!controller.running" ng-click="controller.runCode()" type="button" class="btn btn-default text-right"><img src="./images/play.png" width="20"/> <span translate>CODE_RUN</span></button>
-            <button ng-show="controller.running" ng-click="controller.stopCode()" type="button" class="btn btn-default"><img src="./images/stop.png" width="20"/> <span translate>CODE_STOP</span></button>
-          </div>
-          <div class="col-xs- col-sm-9 col-md-9 col-lg-9">
-            <span translate>TITLE</span> : {{controller.sketchTitle}}
-          </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" translate>BLOCKLY_VERSION</a></li>
+                </ul>
+                <!--Dropdown User options-->
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show="controller.username" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{controller.username}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-show="controller.username" ng-click="controller.signOut()" translate>SIGN_OUT</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--End Dropdown User options-->
+                <form ng-hide="controller.username" class="navbar-form navbar-right">
+                    <button ng-click="controller.signIn()" class="btn btn-default" translate>SIGN_IN</button>
+                </form>
+                <!--Left navbar-->
+                <ul class="nav navbar-nav">
+                    <!--Dropdown File options-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate>FILE<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-click="controller.saveSketch()" href="#"><span translate>SAVE_SKETCH_AS</span> <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>
+                            <li><a ng-click="controller.manageSketches()" href="#"><span translate>OPEN_SKETCH</span> <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-click="controller.clearBlocks()" href="#"><span translate>BUTTON_CLEAR_BLOCKS</span> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="LANGUAGE"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ng-class="{'active': controller.selectedLanguage == 'es'}">
+                                <a ng-click="controller.changeLanguage('es')" href="#" translate="BUTTON_LANG_ES"></a>
+                            </li>
+                            <li ng-class="{'active': controller.selectedLanguage == 'en'}">
+                                <a ng-click="controller.changeLanguage('en')" href="#" translate="BUTTON_LANG_EN"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>  <!-- End Left navbar-->
+            </div>
         </div>
-        
-        <!-- Here goes the main workspace -->
-        <blockly options="controller.blocklyOptions" workspace="controller.workspace" on-injected="controller.onInjected"></blockly>
-      
-      </div>
-      <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <h3 class="text-muted small" translate>VIRTUAL_BOARD</h3>
-        <p class="text-muted small" translate>VIRTUAL_BOARD_MSG</p>
+    </nav><!-- End Navbar-->
+    <!-- container -->
+    <div class="container-fluid" ng-cloak>
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <button ng-show="!controller.running" ng-click="controller.runCode()" type="button" class="btn btn-default text-right"><img src="./images/play.png" width="20" /> <span translate>CODE_RUN</span></button>
+                <button ng-show="controller.running" ng-click="controller.stopCode()" type="button" class="btn btn-default"><img src="./images/stop.png" width="20" /> <span translate>CODE_STOP</span></button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <span translate>TITLE</span> : {{controller.sketchTitle}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <!-- Here goes the main workspace -->
+                <blockly options="controller.blocklyOptions" workspace="controller.workspace" on-injected="controller.onInjected"></blockly>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <h3 id="virtual_board_title" class="text-muted small" translate>VIRTUAL_BOARD</h3>
+                <p class="text-muted small" translate>VIRTUAL_BOARD_MSG</p>
+                <!-- Here goes the virtual board -->
+                <div virtual-firstmakers state="controller.state" board="controller.virtualBoard"></div>
 
+                <p class="text-muted small" translate>VIRTUAL_BOARD_MSG_2</p>
+                <p><span class="label label-primary" translate>{{controller.statusMessageText}}</span></p>
+                <p><span class="label label-default" ng-show="controller.boardState.connecting">{{controller.boardState.port}}</span></p>
+                <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting" translate>CONNECT_FIRSTMAKERS</span></p>
+                <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false" translate>CONNECT</button>
+                <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default" ng-show="controller.boardState.connected && !controller.boardState.connecting && controller.platform == 'win32' && controller.arch == 'ia32'" translate>DISCONNECT</button>
+                <p class="text-muted small" translate>DEVICE_NAME</p>
+                <p class="text-muted small label label-default">{{controller.deviceName}}</p>
 
-        <!-- Here goes the virtual board -->
-        <div virtual-firstmakers state="controller.state" board="controller.virtualBoard"></div>
-        
-        <p class="text-muted small" translate>VIRTUAL_BOARD_MSG_2</p>
-        <p><span class="label label-primary" translate>{{controller.statusMessageText}}</span></p>
-        <p><span class="label label-default" ng-show="controller.boardState.connecting" >{{controller.boardState.port}}</span></p>
-        <p><span calss="text-muted small" ng-show="!controller.boardState.connected && !controller.boardState.connecting" translate>CONNECT_FIRSTMAKERS</span></p>
-        <button ng-click="controller.scanPorts()" type="button" class="btn btn-default btn-small" ng-show="!controller.boardState.connected && !controller.boardState.connecting && false" translate>CONNECT</button>
-        <button ng-click="controller.disconnectBoard()" type="button" class="btn btn-default"  ng-show="controller.boardState.connected && !controller.boardState.connecting && controller.platform == 'win32' && controller.arch == 'ia32'" translate>DISCONNECT</button>
-      
-        <p class="text-muted small" translate>DEVICE_NAME</p>
-        <p class="text-muted small label label-default"">{{controller.deviceName}}</p>
-
-      </div>  
+            </div>
+        </div>
     </div>
-    
+    <!--End container-->
 
-     <div class="footer">
-       <p>Firstmakers</p>
+    <!-- footer -->
+    <div class="footer">
+        <div class="container-fluid">
+            <p>Firstmakers</p>
+            <button ng-click="controller.softReset()" type="button" class="btn btn-default"><span translate>SOFT_RESET</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
     </div>
-    <button ng-click="controller.softReset()" type="button" class="btn btn-default" ><span translate>SOFT_RESET</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
-
-
-  </div><!-- container -->
+    <!--End footer -->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -179,7 +153,7 @@
 
     <script src="http://api.firstmakers.com:3000/mqtt.js"></script>
 
-    
+
 
     <!-- endbower -->
     <!-- endbuild -->
@@ -193,26 +167,26 @@
     <script src="modals/open/open.controller.js"></script>
     <script src="modals/save/save.controller.js"></script>
 
-    <script src="services/blockly.service.js"></script>    
+    <script src="services/blockly.service.js"></script>
     <script src="services/board.service.js"></script>
-    <script src="services/virtualBoard.service.js"></script>    
-    <script src="services/device.service.js"></script>    
-    <script src="services/deviceCommand.service.js"></script>    
+    <script src="services/virtualBoard.service.js"></script>
+    <script src="services/device.service.js"></script>
+    <script src="services/deviceCommand.service.js"></script>
     <script src="services/serial.service.js"></script>
     <script src="services/auth.service.js"></script>
     <script src="services/data.service.js"></script>
     <script src="services/localstorage.service.js"></script>
     <script src="services/nameGenerator.service.js"></script>
     <script src="services/mqtt.service.js"></script>
-    
+
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>
     <script src="directives/uploadfile.js"></script>
     <script src="directives/customOnChange.js"></script>
     <!-- endbuild -->
-    
 
 
-  </body>
-  </html>
 
+</body>
+
+</html>

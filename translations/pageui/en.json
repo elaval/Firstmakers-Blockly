@@ -71,6 +71,9 @@
   "ERROR_SIGNUP_FAILED_ACTIVATION_EMAIL" : "Error: Failed to send activation email",
 
   "DEVICE_NAME" : "Device name:",
+  "FILE" : "File",
+  "LANGUAGE" : "Language",
+
 
   "__DUMMY__" : "no trailing comma"
 }

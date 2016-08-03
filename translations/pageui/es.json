@@ -70,6 +70,8 @@
   "ERROR_SIGNUP_LACK_EMAIL_USERNAME_PASSWORD" : "Se requiere un email, contraseña y nombre de usuario válido",
 
   "DEVICE_NAME" : "Nombre de dispositivo:",
+  "FILE" : "Archivo",
+  "LANGUAGE" : "Idioma",
 
 
   "__DUMMY__" : "no trailing comma"
