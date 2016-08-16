@@ -233,6 +233,17 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
     };
     interpreter.setProperty(scope, 'prompt',
         interpreter.createNativeFunction(wrapper));
+      
+    // batteryLevel() block.
+    wrapper = function(callback) {  
+      DeviceCommandService.batteryLevel()
+      .then(function(value) {
+        callback(interpreter.createPrimitive(value));
+      })
+    };
+    interpreter.setProperty(scope, 'fm_batteryLevel',
+        interpreter.createAsyncFunction(wrapper));
+    
     
     // potentiometer() block.
     wrapper = function(callback) {  

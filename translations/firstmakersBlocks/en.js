@@ -67,5 +67,7 @@ Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TITLE = "configure DC motor %1 %2 pin %3 fo
 Blockly.Msg.FIRSTMAKERS_MOTOR_CONFIG_TOOLTIP = "configure DC motor pins";
 Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TITLE = "set PWM pin %1 to %2";
 Blockly.Msg.FIRSTMAKERS_ANALOG_WRITE_TOOLTIP = "set value of a PWM digital output (analog write)";
+Blockly.Msg.FIRSTMAKERS_BATTERY_LEVEL_TITLE = "Battery Level";
+Blockly.Msg.FIRSTMAKERS_BATTERY_LEVEL_TOOLTOP = "Battery Level"; 
 
 Blockly.Msg.FIRSTMAKERS_MESSAGE = "message";

@@ -59,7 +59,12 @@ angular.module('tideApp')
       var value = rawValue < 800;
 
       return value
-    }
+    },
+      
+    battery :function(rawValue){
+        var value = (12400*5*rawValue)/(1024*10000);
+        return Math.round(10*value)/10;
+    }  
   }
   
   function createDevice(_board) {
@@ -112,7 +117,11 @@ angular.module('tideApp')
         board.analogRead(5, function(value) {
             board.pins[board.analogPins[5]].value = value;
             sensorValues.potentiometer = valueConverter.potentiometer(value);
-        })    
+        })  
+        board.analogRead(6, function(value) {
+            board.pins[board.analogPins[6]].value = value;
+            sensorValues.battery = valueConverter.battery(value);
+        }) 
         
         board.pinMode(2, board.MODES.INPUT);     
         board.digitalRead(2, function(value) {
@@ -303,11 +312,13 @@ angular.module('tideApp')
       board.digitalRead(2, function(value) {
         deferred.resolve(value == board.HIGH);
       })
-      
       return deferred.promise;
     }
     
-      
+    device.batteryLevel = function(){
+      return sensorValues.battery;
+    }
+    
     return device;
   }
   

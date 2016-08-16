@@ -81,10 +81,45 @@
       </value>
     </block> 
     <block type="motor_direction"></block> 
-
+</category>
     
-
-  </category>
+<!--FMK V2 -->    
+<category name="CAT_FIRSTMAKERS_2" colour="210">
+    <block type="light_on"></block>      
+    <block type="light_off"></block> 
+    <block type="buzzer_on"></block>      
+    <block type="buzzer_off"></block> 
+    
+    <block type="potentiometer"></block> 
+    <block type="temperature_sensor"></block> 
+    <block type="light_sensor"></block> 
+    <block type="audio_sensor"></block> 
+    <block type="humidity_sensor"></block> 
+    <block type="infrared_sensor"></block> 
+    
+    <block type="button"></block> 
+    <block type="buzzer_on"></block>
+    <block type="buzzer_off"></block>
+    <!-- -->
+    <block type="fmk2_digital_pin_on"></block>
+    <block type="fmk2_digital_pin_off"></block>
+    <block type="fmk2_analog_write">
+        <value name="VALUE">
+            <block type="math_number">
+                <field name="NUM">100</field>
+            </block>
+        </value>
+    </block>
+    <block type="fmk2_servo">
+      <value name="ANGLE">
+        <block type="math_number">
+          <field name="NUM">180</field>
+        </block>
+      </value>
+    </block> 
+    <block type="fmk2_battery"></block>
+</category>
+    
   <category name="CAT_TEXT"  colour="160" >
      <block type="say">
         <value name="CONTENT">
