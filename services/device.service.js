@@ -69,6 +69,7 @@ angular.module('tideApp')
   
   function createDevice(_board) {
     var board = _board;
+    console.log(board.analogPins.length);
     var device = {};
     var sensorValues = {
       'potentiometer': 0,
@@ -117,12 +118,14 @@ angular.module('tideApp')
         board.analogRead(5, function(value) {
             board.pins[board.analogPins[5]].value = value;
             sensorValues.potentiometer = valueConverter.potentiometer(value);
-        })  
-        board.analogRead(6, function(value) {
-            board.pins[board.analogPins[6]].value = value;
-            sensorValues.battery = valueConverter.battery(value);
-        }) 
-        
+        })
+        if(board.analogPins.length > 6){
+            board.analogRead(6, function(value) {
+                board.pins[board.analogPins[6]].value = value;
+                sensorValues.battery = valueConverter.battery(value);
+            }); 
+        }
+
         board.pinMode(2, board.MODES.INPUT);     
         board.digitalRead(2, function(value) {
             sensorValues.button = value === board.HIGH; 
@@ -182,10 +185,7 @@ angular.module('tideApp')
         board.digitalRead(13, function(value) {
             sensorValues.pins[13].value = value; 
         })
- 
       }
-
-
     }
 
     

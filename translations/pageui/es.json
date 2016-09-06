@@ -73,7 +73,7 @@
   "DEVICE_NAME" : "Nombre de dispositivo:",
   "FILE" : "Archivo",
   "LANGUAGE" : "Idioma",
-
+  "DEVICES": "Dispositivos",
 
   "__DUMMY__" : "no trailing comma"
 }

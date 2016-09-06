@@ -13,7 +13,7 @@ angular.module('tideApp')
 .service('SerialService',[ '$rootScope','$q', 'd3', '_', '$http','$timeout', function( $rootScope, $q, d3,_, $http, $timeout) {
   var myself = this;
 
-  var rport = /usb|acm|^com/i;
+  var rport = /usb|DevB|acm|^com/i;
     
 var Serial = {
   locked: {}, // Marks ports that should not be displayed as available
@@ -22,7 +22,7 @@ var Serial = {
   lock: function(port) {
     this.locked[port] = true;
   },
-  
+
   unlock: function(port) {
     this.locked[port] = false;
   },
@@ -30,7 +30,6 @@ var Serial = {
   detect: function(callback) {
 
     var serialport;
-
     if (parseFloat(process.versions.nw) >= 0.13) {
       serialport = require("browser-serialport");
     } else {

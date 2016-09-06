@@ -197,3 +197,7 @@ path.bottom {
 }
 
 #virtual_board_title{ margin-top: 0px;}
+
+.pointer {
+    cursor:pointer;
+}

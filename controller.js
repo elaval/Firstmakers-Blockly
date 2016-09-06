@@ -142,6 +142,11 @@ angular.module('tideApp')
         publishBoardValues();
     }, 100);
     
+    $scope.connect = function(port){
+        //alert('connecting port'+ port);
+        var ports = [port];
+        connectBoard(ports);
+    }  
     
     /**
      * updates customValues in blocks
@@ -204,6 +209,7 @@ angular.module('tideApp')
      */
     function scanPorts() {
         SerialService.Serial.detect(function(ports) {
+            $scope.devices = ports;
             connectBoard(ports);
         });
     }
@@ -287,7 +293,7 @@ angular.module('tideApp')
             options.toolbox = translatedToolbox;
             
             myself.blocklyOptions = options;
-            $log.debug(myself.blocklyOptions);
+            //$log.debug(myself.blocklyOptions);
         })
     }
     
@@ -312,7 +318,7 @@ angular.module('tideApp')
      * If 
      */
     function loadBlocks(sketch) {
-        $log.debug(sketch);
+        //$log.debug(sketch);
 
         var id, title, blocks;
 
@@ -470,7 +476,7 @@ angular.module('tideApp')
         var deferred = $q.defer();
         
         var xml = Blockly.Xml.textToDom(toolboxText);
-        $log.debug(xml);
+        //$log.debug(xml);
         
         var translationPromises = [];
         
@@ -488,16 +494,16 @@ angular.module('tideApp')
         
         $q.all(translationPromises)
         .then(function(res) {
-            $log.debug(res);
+            //$log.debug(res);
         })
         .catch(function(err) {
             $log.error(err);
         })
         .finally(function(d) {
-            $log.debug(d);
-            $log.debug(xml);
+            //$log.debug(d);
+            //$log.debug(xml);
             var toolboxText = Blockly.Xml.domToText(xml);
-            $log.debug(toolboxText);
+            //$log.debug(toolboxText);
             deferred.resolve(toolboxText);
         })
         
@@ -582,7 +588,7 @@ angular.module('tideApp')
         myself.physicalBoard = null;
         
         scanPorts();
-        $log.debug(a);
+        //$log.debug(a);
     })
     
     /**
@@ -632,12 +638,12 @@ angular.module('tideApp')
         
         
         myself.pressedKey = String.fromCharCode(e.which)
-        $log.debug(e);
+        //$log.debug(e);
     }
         
     function onKeyUp(e) {
         myself.pressedKey = null;
-        $log.debug(e);
+        //$log.debug(e);
     }
     
     
@@ -669,7 +675,7 @@ angular.module('tideApp')
     $scope.$watch(statusMessage,
         function handleStatusChange( newValue, oldValue ) {
             myself.statusMessageText = newValue;
-            $log.debug( "statusMessage", newValue );
+            //$log.debug( "statusMessage", newValue );
         }
     );
     
