@@ -210,7 +210,7 @@ angular.module('tideApp')
     function scanPorts() {
         SerialService.Serial.detect(function(ports) {
             $scope.devices = ports;
-            connectBoard(ports);
+            /*connectBoard(ports);*/
         });
     }
     
@@ -405,8 +405,7 @@ angular.module('tideApp')
         
         // Listen to changes in the workspace & call onChangeWorkspace 
         myself.workspace.addChangeListener(onWorkspaceChange);
-   
-    
+
         loadBlocks();
     }
     
@@ -459,7 +458,7 @@ angular.module('tideApp')
     function connectionSignal(device) {
         device.buzzer(true);
         device.light(true);
-        $timeout(10)
+        $timeout(200)
         .then(function() {
             device.buzzer(false);
             device.light(false); 
@@ -832,8 +831,21 @@ angular.module('tideApp')
         }
         
     }
-                
-                
+
+   /* $scope.getBluetoothDevices = function(){  
+        BluetoothService.Bluetooth.list(function(devices){
+            console.log(devices);
+            $scope.btDevices = devices;
+        });
+    }
+    
+    $scope.connectBTDevice = function (device){
+        var onConnect = function(socket){
+            console.log( 'connected socket ' + socket);
+        }
+        BluetoothService.Bluetooth.connect(device, onConnect);
+
+    }   */
 }]);
 
 angular.module('tideApp')

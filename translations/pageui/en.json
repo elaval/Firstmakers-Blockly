@@ -75,5 +75,6 @@
   "FILE" : "File",
   "LANGUAGE" : "Language",
   "DEVICES": "Devices",
+  "BT_DEVICES": "Bluetooth Devices",
   "__DUMMY__" : "no trailing comma"
 }

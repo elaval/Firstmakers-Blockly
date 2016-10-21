@@ -80,6 +80,7 @@
                             <li ng-class="" ng-repeat="device in devices"><a class="pointer" ng-click="connect(device)">{{device}}</a></li>
                         </ul>
                     </li>
+
                 </ul>  <!-- End Left navbar-->
             </div>
         </div>
@@ -125,6 +126,7 @@
         <div class="container-fluid">
             <p>Firstmakers</p>
             <button ng-click="controller.softReset()" type="button" class="btn btn-default"><span translate>SOFT_RESET</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+            <button ng-click="getBluetoothDevices()" type="button" class="btn btn-default">BTDEVICES</button>
         </div>
     </div>
     <!--End footer -->
@@ -184,6 +186,7 @@
     <script src="services/localstorage.service.js"></script>
     <script src="services/nameGenerator.service.js"></script>
     <script src="services/mqtt.service.js"></script>
+    <script src="services/bluetooth.service.js"></script>
 
     <script src="directives/blockly.js"></script>
     <script src="directives/virtualFirstmakers.js"></script>

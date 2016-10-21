@@ -74,6 +74,6 @@
   "FILE" : "Archivo",
   "LANGUAGE" : "Idioma",
   "DEVICES": "Dispositivos",
-
+  "BT_DEVICES": "Dispositivos Bluetooth",
   "__DUMMY__" : "no trailing comma"
 }

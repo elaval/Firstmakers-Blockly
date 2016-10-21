@@ -69,7 +69,7 @@ angular.module('tideApp')
   
   function createDevice(_board) {
     var board = _board;
-    console.log(board.analogPins.length);
+    //console.log(board.analogPins.length);
     var device = {};
     var sensorValues = {
       'potentiometer': 0,
@@ -190,8 +190,15 @@ angular.module('tideApp')
 
     
     device.digitalWrite = function(pin,value) {
-        board.pinMode(pin, board.MODES.OUTPUT);
-        board.digitalWrite(pin, value ? board.HIGH : board.LOW);
+       // $timeout(20)
+        //.then(function() {
+            var d = new Date();
+            console.log('digital write '+ pin +' '+ value+' '+   d.getTime());
+            board.pinMode(pin, board.MODES.OUTPUT);
+            board.digitalWrite(pin, value ? board.HIGH : board.LOW);
+        //});
+        //board.pinMode(pin, board.MODES.OUTPUT);
+        //board.digitalWrite(pin, value ? board.HIGH : board.LOW);
     }
     
     device.digitalRead = function(pin) {

@@ -102,14 +102,12 @@ function($rootScope, $q, $templateRequest,$log, d3,_, $http, $timeout ,  SerialS
         //document.getElementById('stepButton').disabled = 'disabled';
         workspace.highlightBlock(null);
         $rootScope.$broadcast("blockly.codeCompleted");
-        
         return;
       }
     }
     
     // No wait between each step (this can be increased for educational/monitoring purposes)
     $timeout(0).then(stepCode);
-
   }
 
 

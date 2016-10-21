@@ -30,11 +30,11 @@ var Serial = {
   detect: function(callback) {
 
     var serialport;
-    if (parseFloat(process.versions.nw) >= 0.13) {
+    /*if (parseFloat(process.versions.nw) >= 0.13) {
       serialport = require("browser-serialport");
-    } else {
+    } else {*/
       serialport = require("serialport");
-    }
+    //}
 
     // Request a list of available ports, from
     // the result set, filter for valid paths

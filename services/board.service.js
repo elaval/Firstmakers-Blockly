@@ -109,6 +109,8 @@ angular.module('tideApp')
     .then(function() {
 
       arduino.board = new Board(port, function(err) { 
+          console.log(new Date().getTime());
+          console.log(arduino.board);
           if (!err) { 
 
               // Clear timeout to avoid problems if connection is closed before timeout is completed
@@ -116,7 +118,7 @@ angular.module('tideApp')
 
               // Start the keepAlive interval
               //myself.arduino.keepAliveIntervalID = setInterval(myself.arduino.keepAlive, 5000);
-
+              //arduino.board.serialBaud(57600);
               arduino.board.sp.on('disconnect', arduino.disconnectHandler);
               arduino.board.sp.on('close', arduino.closeHandler);
               arduino.board.sp.on('error', arduino.errorHandler);
@@ -154,7 +156,7 @@ angular.module('tideApp')
 
           }
 
-      }, 10000);
+      }, 15000);
 
     })
 
@@ -165,7 +167,7 @@ angular.module('tideApp')
   };
   
   arduino.disconnect = function(silent) {
-
+      //arduino.board.serialClose(arduino.board.sp.path);///
       if (arduino.isBoardReady()) {
           // Prevent disconnection attempts before board is actually connected
           arduino.connected = false;
@@ -196,7 +198,6 @@ angular.module('tideApp')
           arduino.board.sp.removeListener('disconnect', arduino.disconnectHandler);
           arduino.board.sp.removeListener('close', arduino.closeHandler);
           arduino.board.sp.removeListener('error', arduino.errorHandler);
-
           arduino.board = undefined;
       };
 
